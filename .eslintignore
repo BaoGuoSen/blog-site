@@ -1,0 +1,12 @@
+# http://eslint.cn/docs/user-guide/configuring#ignoring-files-and-directories
+
+!.*.js
+!.*.ts
+!.*.tsx
+
+dist/**
+server/**
+mock/**
+node_modules/**
+vite.config.ts
+typing.d.ts
