@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "npm run lint:ci && vite",
-    "dev:mock": "npm run lint:ci && (ts-node -T ./server/index.ts & vite)",
+    "server:mock": "ts-node -T ./server/index.ts",
+    "dev:mock": "npm run dev & npm run server:mock",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "prettier": "prettier --write **/*.{js,jsx,tsx,ts,less,md,json}",
     "lint:ci": "npm run eslint:ci && npm run stylelint:ci",
     "eslint:ci": "eslint --cache --ext .tsx,.ts ./src",
     "stylelint:ci": "stylelint ./src/**/*.less --custom-syntax postcss-scss",
