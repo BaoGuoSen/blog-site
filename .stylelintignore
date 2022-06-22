@@ -2,3 +2,4 @@ build
 dist
 
 !.*.module.less
+src/theme.less
