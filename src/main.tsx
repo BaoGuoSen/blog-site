@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { useRoutes, BrowserRouter } from "react-router-dom";
 
-import "./main.css";
+import "./main.less";
 import routers from "./router";
 
 const Index = () => useRoutes(routers);

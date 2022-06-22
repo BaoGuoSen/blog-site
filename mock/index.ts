@@ -6,18 +6,30 @@ const Mock = require('mockjs');
  */
 
 module.exports = {
-  'post /api/toB/user/list': (req, res) => {
+  'post /api/user/list': (req, res) => {
     const { list } = Mock.mock({
-      'list|1-10': [
-        { id: '@id' }
+      'list|6-20': [
+        {
+          id: '@id',
+          name: '@name',
+          avatar: '@url',
+          backgroundUrl: '@url',
+          desc: '@string',
+          createTime: '@time("yyyy-MM-dd HH:mm:ss")',
+          email: '@url',
+          github: '@url'
+        }
       ]
     });
 
-    res.json({
-      code: 200,
-      data: {
-        list
-      }
-    });
+    setTimeout(() => {
+      res.json({
+        code: 200,
+        data: {
+          total: list.length,
+          list
+        }
+      });
+    }, 230);
   }
 };

@@ -1,7 +1,10 @@
 import { RouteObject } from "react-router-dom";
 
 import Layout from '../layout';
-import Home from '../page/home';
+import Author from '../page/manage/author';
+// import Tag from '../page/manage/tag';
+// import Article from '../page/manage/article';
+// import System from '../page/manage/system';
 
 /**
  * 路由配置
@@ -9,13 +12,25 @@ import Home from '../page/home';
  */
 const routers: RouteObject[] = [
   {
-    path: '/home',
+    path: '/manage',
     element: <Layout />,
     children: [
       {
-        path: '/test',
-        element: <Home />
+        path: '/author',
+        element: <Author />
       }
+      // {
+      //   path: '/tag',
+      //   element: <Tag />
+      // },
+      // {
+      //   path: '/article',
+      //   element: <Article />
+      // },
+      // {
+      //   path: '/system',
+      //   element: <System />
+      // }
     ]
   }
 ];

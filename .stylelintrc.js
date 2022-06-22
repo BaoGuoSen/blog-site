@@ -5,6 +5,14 @@ module.exports = {
    * @see https://cloud.tencent.com/developer/section/1489630
    */
   rules: {
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": [
+          "global"
+        ]
+      }
+    ],
     "block-no-empty": true,
     indentation: 2,
     "max-empty-lines": 1,
@@ -306,4 +314,4 @@ module.exports = {
       "pointer-events"
     ]
   }
-}
+};
