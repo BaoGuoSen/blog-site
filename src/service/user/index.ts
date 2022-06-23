@@ -1,6 +1,8 @@
 import type { User } from './types';
 import type { Params } from 'ahooks/lib/usePagination/types';
 
+import { message } from 'antd';
+
 import request from '../../utils/http';
 
 const getUsers = async (pageParams: Params[0], params: { id: string; }) => {
@@ -12,4 +14,22 @@ const getUsers = async (pageParams: Params[0], params: { id: string; }) => {
   return data;
 };
 
-export { getUsers };
+async function addUser(params: Omit<User, 'id' | 'createdAt'>) {
+  const { msg } = await request<null>('api/user/add', params);
+
+  message.success(msg);
+}
+
+async function deleteUser(params: Pick<User, 'id'>) {
+  const { msg } = await request<null>('api/user/delete', params);
+
+  message.success(msg);
+}
+
+async function updateUser(params: Omit<User, 'createdAt'>) {
+  const { msg } = await request<null>('api/user/update', params);
+
+  message.success(msg);
+}
+
+export { getUsers, addUser, deleteUser, updateUser };

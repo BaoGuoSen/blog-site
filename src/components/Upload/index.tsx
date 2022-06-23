@@ -14,9 +14,9 @@ import { convertUrlToFileList, removeUrls, appendUrl, getFileType } from './meth
 
 const Index: React.FC<IUploadProps> = ({
   maxSize,
+  value = '',
   minSize = 0,
   maxCount = 1,
-  value: url = '',
   uploadText = '上传',
   showValue = false,
   onChange = () => void 0,
@@ -24,6 +24,7 @@ const Index: React.FC<IUploadProps> = ({
   request = async () => '',
   listType = 'picture-card'
 }) => {
+  const url = value || '';
   const fileList = useMemo(() => convertUrlToFileList(url).slice(-maxCount), [maxCount, url]);
   const { execute: submit, loading } = useAsync(request, { immediate: false });
   const showDisabled = loading || showValue;

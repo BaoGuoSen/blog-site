@@ -9,6 +9,9 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'http://172.30.12.83:7033/'
+      },
+      '/static': {
+        target: 'http://172.30.12.83:7033/'
       }
     }
   },

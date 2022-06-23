@@ -1,15 +1,15 @@
 import type { TableColumnProps } from 'antd';
-import type { User } from '@/service/user/types';
+import type { Tag } from '@/service/tag/types';
 
 import { useAntdTable } from 'ahooks';
 import SearchBar from '@/components/SearchBar';
 import { Form, Button, Space, Popconfirm } from 'antd';
 
 import styles from "./index.module.less";
+import TagDrawerContent from './DrawerContent';
 import SafeTable from '@/components/SafeTable';
 import useFormDrawer from '@/hooks/useFormDrawer';
-import AuthorDrawerContent from './DrawerContent';
-import { deleteUser, getUsers } from '@/service/user';
+import { getTags, deleteTag } from '@/service/tag';
 import { colums, searchBarFields } from './staticModel';
 
 const Index = () => {
@@ -19,24 +19,24 @@ const Index = () => {
     tableProps,
     search: { submit, reset },
     loading
-  } = useAntdTable(getUsers, { form });
+  } = useAntdTable(getTags, { form });
 
   const deleteAuthor = async (id: number) => {
-    await deleteUser({ id });
+    await deleteTag({ id });
     reset();
   };
 
-  // 新增 or 更新作者
-  const onAddOrUpdateClick = (data?: User) => {
+  // 新增 or 更新标签
+  const onAddOrUpdateClick = (data?: Tag) => {
     openDrawer({
       width: 500,
-      title: data ? '更新作者' : '添加作者',
-      content: <AuthorDrawerContent data={data} />,
+      title: data ? '更新标签' : '添加标签',
+      content: <TagDrawerContent data={data} />,
       refresh: reset
     });
   };
 
-  const columns: TableColumnProps<User>[] = [
+  const columns: TableColumnProps<Tag>[] = [
     ...colums,
     {
       title: '操作',
@@ -44,7 +44,7 @@ const Index = () => {
         <Space size="middle">
           <a onClick={() => onAddOrUpdateClick(record)}>Update</ a>
           <Popconfirm
-            title="确定删除这个作者吗?"
+            title="确定删除这个标签吗?"
             onConfirm={() => deleteAuthor(record.id)}
             okText="Yes"
             cancelText="No"
@@ -58,7 +58,7 @@ const Index = () => {
 
   return (
     <div className={styles.container}>
-      <h2>作者管理</h2>
+      <h2>标签管理</h2>
       <div className={styles.search}>
         <SearchBar
           form={form}
@@ -70,7 +70,7 @@ const Index = () => {
       </div>
 
       <div className={styles['add-btn']}>
-        <Button onClick={() => onAddOrUpdateClick()} type="primary">添加作者</Button>
+        <Button onClick={() => onAddOrUpdateClick()} type="primary">添加标签</Button>
       </div>
 
       <SafeTable columns={columns} rowKey="id" {...tableProps} />

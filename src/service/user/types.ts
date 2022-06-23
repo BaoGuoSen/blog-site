@@ -22,7 +22,7 @@ interface User {
   /**
    * 注册日期
    */
-  createTime?: string;
+  createAt?: string;
   /**
    * 邮箱
    */

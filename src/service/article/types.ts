@@ -1,28 +1,38 @@
+import { Tag } from "../tag/types";
+
 interface Article {
   /**
    * 主键id
    */
   id: number;
   /**
-   * title
+   * 文章标题
    */
   title?: string;
   /**
-   * desc
+   * 文章摘要
    */
   desc?: string;
   /**
-   * backgroundUrl
+   * 封面图
    */
   backgroundUrl?: string;
+  /**
+   * 发布日期
+   */
+  createAt: string;
   /**
    * 作者id
    */
   authorId?: number;
   /**
-   * tag
+   * 文章所属标签
    */
-  tags?: 'id';
+  tags?: Tag[];
+  /**
+   * 文章阅读量
+   */
+  visiteCount: number;
   /**
    * markdown
    */
