@@ -3,18 +3,18 @@ import type { ICreateFormConfig } from '@/utils/createForm/types';
 
 import { useEffect, useCallback } from 'react';
 
+import { Tag } from '@/service/tag/types';
 import createForm from '@/utils/createForm';
-import { User } from '@/service/user/types';
-import { addUser, updateUser } from '@/service/user';
+import { addTag, updateTag } from '@/service/tag';
 import { drawerFormComponents } from './staticModel';
 
-type IProps = IFormWithDrawer & { data?: User}
+type IProps = IFormWithDrawer & { data?: Tag}
 
-const AuthorDrawerContent: React.FC<IProps> = ({ register = () => void 0, data }) => {
+const TagDrawerContent: React.FC<IProps> = ({ register = () => void 0, data }) => {
   const config: ICreateFormConfig = {
     formConfig: {
       layout: 'vertical',
-      itemsRequire: false,
+      itemsRequire: true,
       data
     },
     components: drawerFormComponents
@@ -22,14 +22,14 @@ const AuthorDrawerContent: React.FC<IProps> = ({ register = () => void 0, data }
   const { formStructure, form } = createForm(config);
 
   const handleFinish = useCallback(async () => {
-    const author: Omit<User, 'id' | 'createdAt'> = await form.validateFields();
+    const tag: Omit<Tag, 'id'> = await form.validateFields();
 
     if (data) {
-      await updateUser({ ...author, id: data.id });
+      await updateTag({ ...tag, id: data.id });
       return;
     }
 
-    await addUser(author);
+    await addTag(tag);
   }, []);
 
   // 向父组件的提交按钮, 注册`handleFinish`
@@ -40,4 +40,4 @@ const AuthorDrawerContent: React.FC<IProps> = ({ register = () => void 0, data }
   return <div>{formStructure}</div>;
 };
 
-export default AuthorDrawerContent;
+export default TagDrawerContent;

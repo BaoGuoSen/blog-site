@@ -15,7 +15,7 @@ module.exports = {
           avatar: '@url',
           backgroundUrl: '@url',
           desc: '@string',
-          createTime: '@time("yyyy-MM-dd HH:mm:ss")',
+          createdAt: '@time("yyyy-MM-dd HH:mm:ss")',
           email: '@url',
           github: '@url'
         }
@@ -31,5 +31,41 @@ module.exports = {
         }
       });
     }, 230);
-  }
+  },
+
+  'post /api/tag/list': (req, res) => {
+    const { list } = Mock.mock({
+      'list|6-20': [
+        {
+          id: '@id',
+          name: '@name'
+        }
+      ]
+    });
+
+    setTimeout(() => {
+      res.json({
+        code: 200,
+        data: {
+          total: list.length,
+          list
+        }
+      });
+    }, 230);
+  },
+
+  'post /api/common/auth': (req, res) => {
+    const { isPass } = Mock.mock({
+      isPass: '@boolean'
+    });
+
+    setTimeout(() => {
+      res.json({
+        code: 200,
+        data: {
+          isPass
+        }
+      });
+    }, 230);
+  },
 };

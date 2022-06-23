@@ -8,6 +8,7 @@ import menuItems from './menuItems';
 import styles from './index.module.less';
 import CodeModalContent from './modalContent';
 import useFormModal from '@/hooks/useFormModal';
+import { confirmAuth } from '@/service/common';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -21,13 +22,7 @@ const ManageLayout = () => {
     navigate(`/manage/${key}`);
   };
 
-  // 后台权限控制
-  useEffect(() => {
-    if (sessionStorage.getItem('code')) {
-      setValidate(true);
-      return;
-    }
-
+  const authModal = () => {
     openModal({
       title: '密钥验证',
       closable: false,
@@ -36,6 +31,27 @@ const ManageLayout = () => {
       showCancel: false,
       content: <CodeModalContent setValidate={setValidate} />
     });
+  };
+
+  // 后台权限控制
+  useEffect(() => {
+    const isAuth = async () => {
+      const code = sessionStorage.getItem('code');
+
+      if (!code) {
+        authModal();
+        return;
+      }
+
+      try {
+        await confirmAuth({ code });
+        setValidate(true);
+      } catch (error) {
+        authModal();
+      }
+    };
+
+    isAuth();
   }, []);
 
   return (

@@ -18,13 +18,14 @@ request.interceptors.response.use(async (response) => {
   return response;
 });
 
-async function betterRequest<R>(url: string, params: Record<string, any>) {
+async function betterRequest<R>(url: string, params: Record<string, any>, file?: FormData) {
   try {
     const { data, code, msg } = await request<Promise<ResBasic<R>>>(
       url,
       {
         method: 'POST',
-        data: params
+        data: file || params,
+        requestType: file ? 'form' : 'json'
       }
     );
 
