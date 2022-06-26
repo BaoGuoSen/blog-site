@@ -3,7 +3,7 @@ import { RouteObject } from "react-router-dom";
 import Layout from '../layout';
 import Author from '../page/manage/author';
 import Tag from '../page/manage/tag';
-// import Article from '../page/manage/article';
+import Article from '../page/manage/article';
 import System from '../page/manage/system';
 
 /**
@@ -23,10 +23,10 @@ const routers: RouteObject[] = [
         path: '/tag',
         element: <Tag />
       },
-      // {
-      //   path: '/article',
-      //   element: <Article />
-      // },
+      {
+        path: '/article',
+        element: <Article />
+      },
       {
         path: '/system',
         element: <System />

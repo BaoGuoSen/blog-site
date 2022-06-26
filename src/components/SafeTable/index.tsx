@@ -13,7 +13,7 @@ const CellComponent = ({
 }: {
   [key: string]: unknown;
   children: React.ReactNode[];
-}) => <td {...props}>{children[1] || '-'}</td>;
+}) => <td {...props}>{children[1] ?? '-'}</td>;
 
 const Index = <T extends object = any>({ columns = [], scroll, ...props }: TableProps<T>) => {
   // chore: 过滤掉title为空的列

@@ -5,7 +5,7 @@ import { Tag } from "antd";
 
 import randomTagColor from "@/utils/randomTagColor";
 
-const colums: TableColumnProps<TagType>[] = [
+const colums: TableColumnProps<TagType & { viewCount: number }>[] = [
   {
     title: 'id',
     dataIndex: 'id'
@@ -14,6 +14,11 @@ const colums: TableColumnProps<TagType>[] = [
     title: '名称',
     dataIndex: 'name',
     render: (_, { name }) => <Tag color={randomTagColor()}>{name}</Tag>
+  },
+  {
+    title: '点击量',
+    dataIndex: 'viewCount',
+    render: (_, { viewCount }) => viewCount.toLocaleString()
   }
 ];
 
