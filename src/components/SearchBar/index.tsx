@@ -6,7 +6,7 @@ import type { CurrentStatus, SearchBarProps } from './types';
 import type { ICreateFormConfig } from '@/utils/createForm/types';
 
 import { Button } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 
 import createForm from '@/utils/createForm';
@@ -86,6 +86,16 @@ const Index: React.FC<SearchBarProps> = ({
     ]
   };
   const { formStructure } = createForm(formConfig);
+
+  useEffect(() => {
+    if (currentStatus === 'folded') {
+      setLocalFields(fields.slice(0, countEveryLine));
+      return;
+    }
+
+    setLocalFields(fields);
+  }, [fields]);
+
   return formStructure;
 };
 

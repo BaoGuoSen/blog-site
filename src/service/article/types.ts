@@ -32,7 +32,7 @@ interface Article {
   /**
    * 文章阅读量
    */
-  visiteCount: number;
+  viewCount: number;
   /**
    * markdown
    */

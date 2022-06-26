@@ -32,4 +32,10 @@ async function updateTag(params: Tag) {
   message.success(msg);
 }
 
-export { getTags, addTag, deleteTag, updateTag };
+async function getAllTag() {
+  const { data: { list } } = await request<{ list: Tag[] }>('api/tag/all');
+
+  return list;
+}
+
+export { getTags, addTag, deleteTag, updateTag, getAllTag };

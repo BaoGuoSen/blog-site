@@ -32,4 +32,10 @@ async function updateUser(params: Omit<User, 'createdAt'>) {
   message.success(msg);
 }
 
-export { getUsers, addUser, deleteUser, updateUser };
+async function getAllUser() {
+  const { data: { list } } = await request<{ list: Pick<User, 'id' | 'name'>[] }>('api/user/all');
+
+  return list;
+}
+
+export { getUsers, addUser, deleteUser, updateUser, getAllUser };

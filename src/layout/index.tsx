@@ -1,22 +1,25 @@
 import type { MenuInfo } from 'rc-menu/lib/interface';
 
-import { useState, useEffect } from 'react';
 import { Layout, Menu, Empty } from 'antd';
-import { Outlet, useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
 
 import menuItems from './menuItems';
 import styles from './index.module.less';
 import CodeModalContent from './modalContent';
-import useFormModal from '@/hooks/useFormModal';
 import { confirmAuth } from '@/service/common';
+import useFormModal from '@/hooks/useFormModal';
 
 const { Content, Footer, Sider } = Layout;
 
 const ManageLayout = () => {
-  const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
-  const { Modal: CodeModal, openModal } = useFormModal();
+  const { pathname } = useLocation();
   const [validate, setValidate] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+  const { Modal: CodeModal, openModal } = useFormModal();
+
+  const activeKey = pathname.split('/').slice(-1);
 
   const onMenuItemClick = ({ key }: MenuInfo) => {
     navigate(`/manage/${key}`);
@@ -67,9 +70,9 @@ const ManageLayout = () => {
       >
         <div className={styles.logo}>logo</div>
         <Menu
+          selectedKeys={activeKey}
           onClick={onMenuItemClick}
           theme="light"
-          defaultSelectedKeys={['author']}
           items={menuItems}
         />
       </Sider>

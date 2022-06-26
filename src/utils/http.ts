@@ -18,7 +18,7 @@ request.interceptors.response.use(async (response) => {
   return response;
 });
 
-async function betterRequest<R>(url: string, params: Record<string, any>, file?: FormData) {
+async function betterRequest<R>(url: string, params?: Record<string, any>, file?: FormData) {
   try {
     const { data, code, msg } = await request<Promise<ResBasic<R>>>(
       url,
