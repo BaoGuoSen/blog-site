@@ -3,6 +3,7 @@ import type { Article } from '@/service/article/types';
 
 import { useAntdTable } from 'ahooks';
 import SearchBar from '@/components/SearchBar';
+import { useNavigate } from 'react-router-dom';
 import { Form, Button, Space, Popconfirm } from 'antd';
 
 import styles from "./index.module.less";
@@ -13,6 +14,7 @@ import { deleteArticle, getArticles } from '@/service/article';
 
 const Index = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
   const {
     tableProps,
     search: { submit, reset },
@@ -25,18 +27,22 @@ const Index = () => {
     reset();
   };
 
-  const onAddOrUpdateClick = () => void 0;
+  const onAddOrUpdateClick = (id?: number) => {
+    const url = id ? `/manage/markdown?id=${id}` : '/manage/markdown';
+
+    navigate(url);
+  };
 
   const columns: TableColumnProps<Article>[] = [
     ...colums,
     {
       title: '操作',
-      render: (_, record) => (
+      render: (_, { id }) => (
         <Space size="middle">
-          <a onClick={() => onAddOrUpdateClick()}>Update</ a>
+          <a onClick={() => onAddOrUpdateClick(id)}>Update</ a>
           <Popconfirm
             title="确定删除这篇文章吗?"
-            onConfirm={() => deleteArticleFn(record.id)}
+            onConfirm={() => deleteArticleFn(id)}
             okText="Yes"
             cancelText="No"
           >

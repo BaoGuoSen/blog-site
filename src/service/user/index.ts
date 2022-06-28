@@ -38,4 +38,11 @@ async function getAllUser() {
   return list;
 }
 
-export { getUsers, addUser, deleteUser, updateUser, getAllUser };
+async function getUserCard(params: Pick<User, 'id'>) {
+  const { data } = await request<User & { totalViewCount: number; }>('api/user/card', params);
+
+  return data;
+}
+
+export { getUsers, addUser, deleteUser, updateUser,
+  getAllUser, getUserCard };

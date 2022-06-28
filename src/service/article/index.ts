@@ -32,4 +32,22 @@ async function updateArticle(params: Omit<Article, 'createdAt'>) {
   message.success(msg);
 }
 
-export { getArticles, addArticle, deleteArticle, updateArticle };
+async function getArticleDetail(params: Pick<Article, 'id'>) {
+  const { data } = await request<Article>('api/article/detail', params);
+
+  return data;
+}
+
+async function getSimilarArticles(params: Pick<Article, 'id'>) {
+  const { data: { list } } = await request<{ list: Article[] }>('api/article/similar', params);
+
+  return list;
+}
+
+async function countArticle(params: Pick<Article, 'id'>) {
+  request<null>('api/article/count', params);
+}
+
+export { getArticles, addArticle, deleteArticle,
+  updateArticle, getArticleDetail, getSimilarArticles,
+  countArticle };

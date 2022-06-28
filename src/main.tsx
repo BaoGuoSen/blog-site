@@ -8,10 +8,10 @@ import routers from "./router";
 const Index = () => useRoutes(routers);
 
 const App = () => (
-  <React.StrictMode>
-    <BrowserRouter>
-      <Index />
-    </BrowserRouter>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <BrowserRouter>
+    <Index />
+  </BrowserRouter>
+  // </React.StrictMode>
 );
 ReactDOM.createRoot(document.getElementById("root")!).render(<App />);

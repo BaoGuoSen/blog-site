@@ -5,6 +5,7 @@ import Author from '../page/manage/author';
 import Tag from '../page/manage/tag';
 import Article from '../page/manage/article';
 import System from '../page/manage/system';
+import Markdown from '../page/manage/markdown';
 import ClientArticle from '@/page/client/article/detail';
 
 /**
@@ -31,6 +32,10 @@ const routers: RouteObject[] = [
       {
         path: '/system',
         element: <System />
+      },
+      {
+        path: '/markdown',
+        element: <Markdown />
       }
     ]
   },

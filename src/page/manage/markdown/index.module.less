@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .header {
+    display: flex;
+    align-items: center;
+    padding: 24px;
+
+    :global {
+      .ant-input {
+        font-size: 26px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .markdown {
+    flex: 1;
+
+    :global {
+      .for-container {
+        border-radius: 0;
+        height: 100%;
+      }
+    }
+  }
+}

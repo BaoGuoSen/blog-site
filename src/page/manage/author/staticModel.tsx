@@ -19,8 +19,12 @@ const colums: TableColumnProps<User>[] = [
     dataIndex: 'name'
   },
   {
-    title: '邮箱',
-    dataIndex: 'email'
+    title: '个性签名',
+    dataIndex: 'desc'
+  },
+  {
+    title: '文章阅读量',
+    dataIndex: 'viewCount'
   },
   {
     title: 'github',
@@ -28,8 +32,8 @@ const colums: TableColumnProps<User>[] = [
     render: (_, { github }) => github && < a href= "_blank">{github}</ a>
   },
   {
-    title: '个性签名',
-    dataIndex: 'desc'
+    title: '邮箱',
+    dataIndex: 'email'
   },
   {
     title: '注册时间',

@@ -43,7 +43,7 @@ const useAsync = <A extends Record<string, any>, T>(
     }
   }, []);
 
-  return { execute, status, value, loading };
+  return { execute, status, value, loading, setValue };
 };
 
 export default useAsync;

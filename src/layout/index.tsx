@@ -9,6 +9,8 @@ import styles from './index.module.less';
 import CodeModalContent from './modalContent';
 import { confirmAuth } from '@/service/common';
 import useFormModal from '@/hooks/useFormModal';
+import switchRender from '@/utils/switchRender';
+import { ReactNode } from 'react';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -57,39 +59,52 @@ const ManageLayout = () => {
     isAuth();
   }, []);
 
+  const validateRender = (validate: boolean, Node: ReactNode) => {
+    return validate ? Node : <div className={styles['empty-container']}>
+      <Empty description={<span>暂无访问权限</span>} />
+    </div>;
+  };
+
   return (
     <Layout
       className={styles.container}
       style={{ minHeight: '100vh' }}
     >
-      <Sider
-        collapsible
-        theme="light"
-        collapsed={collapsed}
-        onCollapse={value => setCollapsed(value)}
-      >
-        <div className={styles.logo}>logo</div>
-        <Menu
-          selectedKeys={activeKey}
-          onClick={onMenuItemClick}
-          theme="light"
-          items={menuItems}
-        />
-      </Sider>
+      {
+        switchRender(
+          <>
+            {validateRender(validate, <Outlet />)}
+          </>,
+          <>
+            <Sider
+              collapsible
+              theme="light"
+              collapsed={collapsed}
+              onCollapse={value => setCollapsed(value)}
+            >
+              <div className={styles.logo}>logo</div>
+              <Menu
+                selectedKeys={activeKey}
+                onClick={onMenuItemClick}
+                theme="light"
+                items={menuItems}
+              />
+            </Sider>
 
-      <Layout className="site-layout">
-        {/* <Header /> */}
-        {validate ? (
-          <Content style={{ padding: '24px 24px 0' }}>
-            <Outlet />
-          </Content>
-        ) : (
-          <div className={styles['empty-container']}>
-            <Empty description={<span>暂无访问权限</span>} />
-          </div>
-        )}
-        <Footer style={{ textAlign: 'center' }}>Ant Design 2018 Created by Ant UED</Footer>
-      </Layout>
+            <Layout className="site-layout">
+              {/* <Header /> */}
+              {
+                validateRender(validate,
+                  <Content style={{ padding: '24px 24px 0' }}>
+                    <Outlet />
+                  </Content>)
+              }
+              <Footer style={{ textAlign: 'center' }}>Ant Design 2018 Created by Ant UED</Footer>
+            </Layout>,
+          </>,
+          activeKey[0] === 'markdown'
+        )
+      }
 
       {CodeModal}
     </Layout>
