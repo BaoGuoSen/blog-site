@@ -55,6 +55,9 @@ const searchBarFields = (userOptions: SelectProps['options'], tagOptions: Select
         style={{ width: '100%' }}
         placeholder="Please select tags"
         options={tagOptions}
+        filterOption={(input, option) => {
+          return new RegExp(input, 'i').test(option?.label as string || '');
+        }}
       />
     },
     {
@@ -66,6 +69,9 @@ const searchBarFields = (userOptions: SelectProps['options'], tagOptions: Select
         style={{ width: '100%' }}
         placeholder="Please select authors"
         options={userOptions}
+        filterOption={(input, option) => {
+          return new RegExp(input, 'i').test(option?.label as string || '');
+        }}
       />
     },
     {

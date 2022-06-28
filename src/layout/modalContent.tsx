@@ -12,7 +12,6 @@ const CodeModalContent: React.FC<IProps> = ({ register = () => void 0, setValida
 
   const config: ICreateFormConfig = {
     formConfig: {
-      layout: 'vertical',
       itemsRequire: true
     },
     components: [

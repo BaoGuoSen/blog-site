@@ -8,7 +8,7 @@ interface Article {
   /**
    * 文章标题
    */
-  title?: string;
+  title: string;
   /**
    * 文章摘要
    */
@@ -36,7 +36,7 @@ interface Article {
   /**
    * markdown
    */
-  content?: string;
+  content: string;
 }
 
 export type { Article };
