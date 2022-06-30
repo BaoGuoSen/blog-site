@@ -1,55 +1,59 @@
 .wrapper {
   &::after {
-    content: '';
-    clear  : both;
     display: block;
+    clear: both;
+    content: "";
   }
 
   >* {
     float: left;
   }
 
-  width    : 90%;
-  min-width: 600px;
-  margin   : 0 auto;
+  margin: 0 auto;
+  width: 90%;
 }
 
 .left {
+  overflow-y: scroll;
+  position: sticky;
+  top: 0;
+  width: 300px;
   min-height: 30vh;
   max-height: 90vh;
-  width     : 300px;
-  overflow-y: scroll;
-  position  : sticky;
-  top       : 0;
 }
 
 .right {
-  width   : 300px;
   position: sticky;
-  top     : 0;
+  top: 0;
+  width: 300px;
 }
 
 .main {
-  width : calc(100% - 620px);
   margin: 0 10px;
+  width: calc(100% - 620px);
 }
 
 @media screen and (max-width: 1400px) {
   .wrapper {
     width: 100%;
   }
-
 }
 
 @media screen and (max-width: 1040px) {
   .main {
-    width : 90%;
+    float: none;
     margin: 0 auto;
-    float : none;
+    width: 90%;
   }
 
   .left,
   .right {
     display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .main {
+    width: 100%;
   }
 }

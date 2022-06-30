@@ -20,7 +20,7 @@ interface Article {
   /**
    * 发布日期
    */
-  createAt: string;
+  createdAt: string;
   /**
    * 作者id
    */
@@ -37,6 +37,10 @@ interface Article {
    * markdown
    */
   content: string;
+  /**
+   * 预计阅读时长
+   */
+  readingTime: string;
 }
 
 export type { Article };

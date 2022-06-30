@@ -12,7 +12,7 @@ const colums: TableColumnProps<Article>[] = [
   {
     title: '标题',
     dataIndex: 'title',
-    render: (_, { id, title }) => <a href={`#${id}`} target="_self">{title}</ a>
+    render: (_, { id, title }) => <a href={`/article?id=${id}`} target="_self">{title}</ a>
   },
   {
     title: '摘要',

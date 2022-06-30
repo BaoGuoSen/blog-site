@@ -11,13 +11,13 @@ import useTimeout from '@/hooks/useTimeout';
 import { getUserCard } from '@/service/user';
 import mergeClassName from '@/utils/mergeClassName';
 import randomTagColor from '@/utils/randomTagColor';
-import ThreeColLayout from './ThreeColLayout/index';
+import ThreeColLayout from './ThreeColLayout';
 import { Catalogue, Viewer } from '@/components/Markdown';
 import { countArticle, getArticleDetail, getSimilarArticles } from '@/service/article';
 
 const Index: React.FC = () => {
   const navigate = useNavigate();
-  const [searchParams, setSeachParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const id = Number(searchParams.get('id'));
   const { value: detail, loading } = useAsync(getArticleDetail, { params: { id } });
