@@ -5,6 +5,12 @@ module.exports = {
    * @see https://cloud.tencent.com/developer/section/1489630
    */
   rules: {
+    "selector-class-pattern": [
+      "^([a-z][a-z0-9]*)(-[a-z0-9]+)*$",
+      {
+        "message": "Expected class selector to be kebab-case"
+      }
+    ],
     "selector-pseudo-class-no-unknown": [
       true,
       {
@@ -13,6 +19,7 @@ module.exports = {
         ]
       }
     ],
+    "max-line-length": 150,
     "block-no-empty": true,
     indentation: 2,
     "max-empty-lines": 1,

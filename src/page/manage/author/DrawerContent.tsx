@@ -26,6 +26,7 @@ const AuthorDrawerContent: React.FC<IProps> = ({ register = () => void 0, data }
 
     if (data) {
       await updateUser({ ...author, id: data.id });
+
       return;
     }
 

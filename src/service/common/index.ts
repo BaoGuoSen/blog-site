@@ -21,4 +21,8 @@ async function upload(params: { file: File; }) {
   return url;
 }
 
-export { confirmAuth, upload };
+async function countWeb() {
+  await request('api/common/webViewCount');
+}
+
+export { confirmAuth, upload, countWeb };
