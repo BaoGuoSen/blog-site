@@ -31,6 +31,10 @@ interface User {
    * git地址
    */
   github?: string;
+  /**
+   * total view
+   */
+  totalViewCount: number;
 }
 
 export type { User };

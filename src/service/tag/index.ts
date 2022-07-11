@@ -1,4 +1,4 @@
-import type { Tag } from './types';
+import type { Tag, TagWithCountInfo } from './types';
 import type { Params } from 'ahooks/lib/usePagination/types';
 
 import { message } from 'antd';
@@ -38,4 +38,21 @@ async function getAllTag() {
   return list;
 }
 
-export { getTags, addTag, deleteTag, updateTag, getAllTag };
+// 查询全平台tag
+async function getTagsByPlatform() {
+  const { data: { list } } = await request<{ list: (Tag & TagWithCountInfo)[] }>('api/tag/view/platform');
+
+  return list;
+}
+
+// 针对用户个性化查询Tag
+async function getTagsByPersonal(params: { authorId: number }) {
+  const { data: { list } } = await request<{ list: (Tag & TagWithCountInfo)[] }>('api/tag/view/personal', params);
+
+  return list;
+}
+
+export {
+  getTags, addTag, deleteTag, updateTag,
+  getAllTag, getTagsByPlatform, getTagsByPersonal
+};

@@ -26,6 +26,14 @@ interface Article {
    */
   authorId?: number;
   /**
+   * 作者昵称
+   */
+  authorName?: string;
+  /**
+   * 作者头像
+   */
+  avatar?: string;
+  /**
    * 文章所属标签
    */
   tags?: Tag[];
@@ -41,6 +49,10 @@ interface Article {
    * 预计阅读时长
    */
   readingTime: string;
+  /**
+   * 字数
+   */
+  length: number;
 }
 
 export type { Article };
