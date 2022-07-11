@@ -1,0 +1,35 @@
+.wrapper {
+  background-color: rgba(216, 189, 189, 0.2);
+  min-height      : 100vh;
+  position        : relative;
+
+}
+
+.tags {
+  padding      : 120px;
+  border-radius: 16px;
+  margin       : 0 auto;
+  margin-top   : 40px;
+  width        : 90%;
+  min-width    : 800px;
+  min-height   : 400px;
+  height       : calc(100vh - 32px - 40px);
+  box-shadow   : 0 2px 40px 0 rgb(174, 174, 174, 1);
+
+  // 3d属性
+  transform-style: preserve-3d;
+  perspective    : 999px;
+
+  // 触发BFC
+  overflow-y: auto;
+}
+
+.tag {
+  float: left;
+}
+
+.icon {
+  width     : 80%;
+  height    : 80%;
+  object-fit: cover;
+}

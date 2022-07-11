@@ -5,6 +5,7 @@ import { message } from 'antd';
 
 import request from '../../utils/http';
 
+// pc
 const getArticles = async (pageParams: Params[0], params: { id: string; }) => {
   const { data } = await request<{ list: Article[], total: number }>('api/article/list', {
     ...params,
@@ -12,6 +13,12 @@ const getArticles = async (pageParams: Params[0], params: { id: string; }) => {
   });
   // {list: [], total: 0}
   return data;
+};
+
+const getClientArticles = async (params: { tagId?: number; authorId?: number; }) => {
+  const { data: { list } } = await request<{ list: Article[], total: number }>('api/article/clientList', params);
+
+  return list;
 };
 
 async function addArticle(params: Omit<Article, 'id' | 'createdAt'>) {
@@ -48,6 +55,8 @@ async function countArticle(params: Pick<Article, 'id'>) {
   request<null>('api/article/count', params);
 }
 
-export { getArticles, addArticle, deleteArticle,
+export {
+  getArticles, addArticle, deleteArticle,
   updateArticle, getArticleDetail, getSimilarArticles,
-  countArticle };
+  countArticle, getClientArticles
+};

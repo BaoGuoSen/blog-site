@@ -1,8 +1,11 @@
 import type { TableColumnProps } from "antd";
 import type { Tag as TagType } from "@/service/tag/types";
+import type { IComponentsConfig } from "@/utils/createForm/types";
 
 import { Tag } from "antd";
 
+import Upload from '@/components/Upload';
+import { upload } from "@/service/common";
 import randomTagColor from "@/utils/randomTagColor";
 
 const colums: TableColumnProps<TagType & { viewCount: number }>[] = [
@@ -26,8 +29,12 @@ const searchBarFields = [
   { label: '名称', name: 'name' }
 ];
 
-const drawerFormComponents = [
-  { label: '名称', name: 'name' }
+const drawerFormComponents: IComponentsConfig = [
+  { label: '名称', name: 'name' },
+  {
+    label: 'ICON', name: 'icon',
+    element: <Upload request={(file) => upload({ file })} />
+  }
 ];
 
 export { colums, searchBarFields, drawerFormComponents };

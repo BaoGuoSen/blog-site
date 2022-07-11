@@ -1,0 +1,65 @@
+@opacity: .5;
+
+.box {
+  position       : relative;
+  transform-style: preserve-3d;
+  cursor         : pointer;
+
+
+  &.animation {
+    animation          : gun 10s ease-in-out infinite;
+    animation-direction: alternate-reverse;
+  }
+
+  &:hover {
+    animation-play-state: paused;
+  }
+
+  // 六个面的公共样式
+  >div {
+    width          : 100%;
+    height         : 100%;
+    position       : absolute;
+    text-align     : center;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    border-radius  : 16px;
+  }
+}
+
+.left {
+  background-color: rgba(255, 0, 0, @opacity);
+  transform-origin: left;
+}
+
+.right {
+  background      : rgba(58, 58, 224, @opacity);
+  transform-origin: right;
+}
+
+.forward {
+  background: rgba(132, 243, 122, @opacity);
+}
+
+.back {
+  background: rgba(85, 36, 13, @opacity);
+}
+
+.up {
+  background: rgba(255, 0, 255, @opacity);
+}
+
+.down {
+  background: rgba(187, 142, 97, @opacity);
+}
+
+@keyframes gun {
+  0% {
+    transform: rotateX(-45deg) rotateY(-30deg);
+  }
+
+  100% {
+    transform: rotateX(30deg) rotateY(30deg);
+  }
+}

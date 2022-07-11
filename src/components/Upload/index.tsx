@@ -20,7 +20,7 @@ const Index: React.FC<IUploadProps> = ({
   uploadText = '上传',
   showValue = false,
   onChange = () => void 0,
-  accept = 'jpg,png,jpeg',
+  accept = 'jpg,png,jpeg,svg',
   request = async () => '',
   listType = 'picture-card'
 }) => {
