@@ -1,30 +1,37 @@
 @border_radius: 8px;
 
 .wrapper {
-  min-height: 100vh;
-  font-size: 14px;
+  min-height      : 100vh;
+  font-size       : 14px;
   background-color: rgb(245 245 245);
 }
 
 .bar {
-  width: 0;
-  height: 8px;
+  width           : 0;
+  height          : 8px;
   background-image: linear-gradient(90deg, #c9e99f, rgb(160 212 216));
-  transition: width ease-in-out 0.5s;
+  transition      : width ease-in-out 0.5s;
 }
 
 .catalogue {
   border-radius: @border_radius;
-  min-height: 200px;
-  background: #fff;
+  min-height   : 200px;
+  background   : #fff;
 }
 
 .article {
-  overflow: hidden;
+  overflow     : hidden;
   border-radius: @border_radius;
 
+  // 隐藏preview
+  :global {
+    .for-edit-preview {
+      display: none;
+    }
+  }
+
   .header {
-    padding: 12px 10px;
+    padding   : 12px 10px;
     background: #fff;
   }
 
@@ -44,8 +51,8 @@
   }
 
   .cover {
-    margin: 12px 0 20px;
-    width: 100%;
+    margin    : 12px 0 20px;
+    width     : 100%;
     max-height: 365px;
     object-fit: cover;
   }
@@ -60,16 +67,16 @@
   }
 
   .name {
-    font-size: 16px;
+    font-size  : 16px;
     font-weight: 600;
-    color: #252933;
+    color      : #252933;
   }
 
   .icons {
-    margin-top: 10px;
-    border-top: 1px solid rgb(0 0 0 / 5%);
+    margin-top   : 10px;
+    border-top   : 1px solid rgb(0 0 0 / 5%);
     border-bottom: 1px solid rgb(0 0 0 / 5%);
-    padding: 6px 0;
+    padding      : 6px 0;
 
     >a {
       display: inline-block;
@@ -77,11 +84,11 @@
 
     >* {
       font-size: 16px;
-      cursor: pointer;
+      cursor   : pointer;
 
       &:hover {
         transition: all ease-out 0.3s;
-        transform: scale(1.5);
+        transform : scale(1.5);
       }
     }
   }
@@ -92,13 +99,13 @@
 
   .count_icon {
     margin-right: 10px;
-    font-size: 20px;
-    color: skyblue;
+    font-size   : 20px;
+    color       : skyblue;
   }
 }
 
 .similar {
-  margin-top: 20px;
+  margin-top : 20px;
   font-family: -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", sans-serif, BlinkMacSystemFont;
 
   &_item {
@@ -118,14 +125,14 @@
 
 // 公共样式
 .readingTime {
-  border-radius: 5px;
-  padding: 2px 5px;
-  font-size: 14px;
-  font-weight: 600;
-  font-style: normal;
+  border-radius : 5px;
+  padding       : 2px 5px;
+  font-size     : 14px;
+  font-weight   : 600;
+  font-style    : normal;
   text-transform: capitalize;
-  color: rgb(160 174 192);
-  background: rgb(237 242 247);
+  color         : rgb(160 174 192);
+  background    : rgb(237 242 247);
 }
 
 .light_color {

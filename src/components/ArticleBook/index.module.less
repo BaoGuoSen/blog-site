@@ -1,0 +1,100 @@
+.container {
+  width     : 200px;
+  margin    : 0 auto;
+  margin-top: 24px;
+
+  .content {
+    cursor          : pointer;
+    position        : relative;
+    width           : 200px;
+    height          : 300px;
+    display         : flex;
+    flex-direction  : column;
+    padding         : 24px;
+    background-color: transparent;
+    box-shadow      : 10px -10px 10px 0 rgba(174, 174, 174, .5);
+
+    background-size    : cover;
+    background-position: center;
+
+    .title {
+      font-size  : 24px;
+      font-weight: bold;
+      text-align : center;
+    }
+
+    .desc {
+      margin-top: 12px;
+      color     : #999;
+      font-size : 16px;
+    }
+
+    .author {
+      position: absolute;
+      bottom  : 24px;
+      right   : 24px;
+    }
+
+    .authorName {
+      color: #eee;
+    }
+
+    .avatar {
+      margin-right: 8px;
+    }
+
+    // .extra {
+    //   position: absolute;
+    //   bottom  : 6px;
+    //   left   : 24px;
+    // }
+
+    .shadowOne,
+    .shadowTwo,
+    .shadowThree {
+      background-size: cover;
+      width          : 100%;
+      height         : 100%;
+      position       : absolute;
+
+      &:not(:last-of-type) {
+        box-shadow: 10px -10px 10px 0 rgba(174, 174, 174, .5);
+      }
+    }
+
+    .shadowOne {
+      z-index   : -1;
+      top       : -10px;
+      right     : -10px;
+    }
+
+    .shadowTwo {
+      z-index: -2;
+      top    : -20px;
+      right  : -20px;
+    }
+
+    .shadowThree {
+      z-index: -3;
+      top    : -30px;
+      right  : -30px;
+    }
+  }
+
+  // 公共样式
+  .readingTime {
+    margin-top: 8px;
+    text-align: right;
+
+    >i {
+      border-radius    : 5px;
+      padding          : 2px 5px;
+      font-size        : 14px;
+      font-weight      : 600;
+      font-style       : normal;
+      text-transform   : capitalize;
+      color            : rgb(160 174 192);
+      // background    : rgb(237 242 247);
+    }
+  }
+}

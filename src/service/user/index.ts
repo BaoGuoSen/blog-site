@@ -44,5 +44,13 @@ async function getUserCard(params: Pick<User, 'id'>) {
   return data;
 }
 
-export { getUsers, addUser, deleteUser, updateUser,
-  getAllUser, getUserCard };
+async function getUsersByRecommend() {
+  const { data: { list } } = await request<User & { list: User[] }>('api/user/recommend', {});
+
+  return list;
+}
+
+export {
+  getUsers, addUser, deleteUser, updateUser,
+  getAllUser, getUserCard, getUsersByRecommend
+};

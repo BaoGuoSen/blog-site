@@ -1,0 +1,100 @@
+.wrapper {
+  background-color: rgba(216, 189, 189, 0.2);
+}
+
+.header {
+  .to_all {
+    line-height    : 48px;
+    font-size      : 22px;
+    cursor         : pointer;
+    text-decoration: underline;
+  }
+}
+
+.users {
+  min-height: 400px;
+  height    : calc(100vh - 48px);
+  width     : 90%;
+  margin    : 0 auto;
+  box-shadow: 0 2px 40px 0 rgba(174, 174, 174, .5);
+
+  padding      : 120px 120px 20px;
+  border-radius: 16px;
+
+  perspective    : 999px;
+  transform-style: preserve-3d;
+
+  overflow-y: auto;
+}
+
+.user {
+  font-size    : 20px;
+  cursor       : pointer;
+  margin-bottom: 60px;
+  border-radius: 16px;
+  float        : left;
+  color        : #fff;
+
+  >div:not(:last-of-type) {
+    padding: 20px;
+  }
+}
+
+.avatar {
+  height: 89px;
+  width : 89px;
+}
+
+.github {
+  color    : #555;
+  font-size: 160px;
+}
+
+.name {
+  font-size: 24px;
+}
+
+.desc {
+  font-size: 22px;
+}
+
+.total {
+  margin-left: 10px;
+  color      : #fff;
+}
+
+.background {
+  width     : 100%;
+  height    : 100%;
+  object-fit: cover;
+  opacity   : .4;
+}
+
+.contributor {
+  font-size: 30px;
+}
+
+
+@media screen and (max-width: 1400px) {
+  .users {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  .users {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .users {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .users {
+    grid-template-columns: 1fr;
+  }
+}

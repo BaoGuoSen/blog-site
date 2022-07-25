@@ -6,7 +6,10 @@ import Tag from '../page/manage/tag';
 import Article from '../page/manage/article';
 import System from '../page/manage/system';
 import Markdown from '../page/manage/markdown';
-import ClientArticle from '@/page/client/article/detail';
+import ClientArticle from '@/page/client/article/';
+import ClientHome from '@/page/client/home';
+import ClientTag from '@/page/client/tag';
+import ClientArticleList from '@/page/client/articleList';
 
 /**
  * 路由配置
@@ -42,6 +45,18 @@ const routers: RouteObject[] = [
   {
     path: '/article',
     element: <ClientArticle />
+  },
+  {
+    path: '/article/list',
+    element: <ClientArticleList />
+  },
+  {
+    path: '/',
+    element: <ClientHome />
+  },
+  {
+    path: '/tag',
+    element: <ClientTag />
   }
 ];
 
