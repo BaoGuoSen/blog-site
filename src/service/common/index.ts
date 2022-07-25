@@ -25,4 +25,10 @@ async function countWeb() {
   await request('api/common/webViewCount');
 }
 
-export { confirmAuth, upload, countWeb };
+async function getCountWeb() {
+  const { data: { viewCount } } = await request<{ viewCount: number; }>('api/common/webViewCount');
+
+  return viewCount;
+}
+
+export { confirmAuth, upload, countWeb, getCountWeb };

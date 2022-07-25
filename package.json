@@ -1,12 +1,12 @@
 {
   "name": "blog-site",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "dev": "npm run eslint:ci && vite --host",
     "server:mock": "nodemon -w mock --ext .ts --exec ts-node -T ./server/index.ts",
     "dev:mock": "npm run dev & npm run server:mock",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --base=./",
     "preview": "vite preview",
     "prettier": "prettier --write **/*.{js,jsx,tsx,ts,less,md,json}",
     "lint:ci": "npm run eslint:ci && npm run stylelint:ci",

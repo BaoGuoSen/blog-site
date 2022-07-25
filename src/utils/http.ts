@@ -26,6 +26,9 @@ async function betterRequest<R>(url: string, params?: Record<string, any>, file?
       url,
       {
         method: 'POST',
+        headers: {
+          code: sessionStorage.getItem('code') || ''
+        },
         data: file || params,
         requestType: file ? 'form' : 'json'
       }

@@ -32,7 +32,7 @@ const searchBarFields = [
 const drawerFormComponents: IComponentsConfig = [
   { label: '名称', name: 'name' },
   {
-    label: 'ICON', name: 'icon',
+    label: 'ICON', name: 'icon', require: false,
     element: <Upload request={(file) => upload({ file })} />
   }
 ];
