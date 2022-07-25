@@ -51,7 +51,7 @@ const Index: React.FC = () => {
     getUserCardData({ id: authorId });
   }, [authorId]);
 
-  useTimeout(() => countArticle({ id }), 5 * 1000);
+  useTimeout(() => countArticle({ id }), 20 * 1000);
   return (
     <div className={styles.wrapper}>
       <div className={styles.bar} style={{ width: detail ? '100%' : undefined }} />
