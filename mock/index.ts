@@ -189,15 +189,11 @@ module.exports = {
 
 
   'post /api/common/auth': (req, res) => {
-    const { isPass } = Mock.mock({
-      isPass: '@boolean'
-    });
-
     setTimeout(() => {
       res.json({
         code: 200,
         data: {
-          isPass
+          isPass: true
         }
       });
     }, 230);
