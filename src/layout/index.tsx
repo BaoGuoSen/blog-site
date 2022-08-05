@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import type { MenuInfo } from 'rc-menu/lib/interface';
 
 import { Layout, Menu, Empty } from 'antd';
@@ -10,7 +11,6 @@ import CodeModalContent from './modalContent';
 import { confirmAuth } from '@/service/common';
 import useFormModal from '@/hooks/useFormModal';
 import switchRender from '@/utils/switchRender';
-import { ReactNode } from 'react';
 
 const { Content, Footer, Sider } = Layout;
 
@@ -72,9 +72,7 @@ const ManageLayout = () => {
     >
       {
         switchRender(
-          <>
-            {validateRender(validate, <Outlet />)}
-          </>,
+          validateRender(validate, <Outlet />),
           <>
             <Sider
               collapsible
@@ -82,7 +80,9 @@ const ManageLayout = () => {
               collapsed={collapsed}
               onCollapse={value => setCollapsed(value)}
             >
-              <div className={styles.logo}>logo</div>
+              <div className={styles.logo}>
+                <img src="http://43.136.172.140/favicon.svg" className={styles.svg} onClick={() => navigate('/')}/>
+              </div>
               <Menu
                 selectedKeys={activeKey}
                 onClick={onMenuItemClick}
@@ -92,14 +92,13 @@ const ManageLayout = () => {
             </Sider>
 
             <Layout className="site-layout">
-              {/* <Header /> */}
               {
                 validateRender(validate,
                   <Content style={{ padding: '24px 24px 0' }}>
                     <Outlet />
                   </Content>)
               }
-              <Footer style={{ textAlign: 'center' }}>Ant Design 2018 Created by Ant UED</Footer>
+              <Footer style={{ textAlign: 'center' }}>MuMuIo Designed by Sanfen, GuoSen. 2022</Footer>
             </Layout>,
           </>,
           activeKey[0] === 'markdown'

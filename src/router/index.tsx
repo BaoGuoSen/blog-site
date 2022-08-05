@@ -1,74 +1,107 @@
-import { RouteObject } from "react-router-dom";
+import type { FC } from 'react';
+import type { RouteObject } from "react-router-dom";
 
 import Layout from '../layout';
-import Author from '../page/manage/author';
 import Tag from '../page/manage/tag';
-import Article from '../page/manage/article';
+import LayoutClient from '../layoutClient';
+import ClientTag from '@/page/client/tag';
+import Author from '../page/manage/author';
 import System from '../page/manage/system';
+import ClientHome from '@/page/client/home';
+import Article from '../page/manage/article';
 import Markdown from '../page/manage/markdown';
 import ClientArticle from '@/page/client/article/';
-import ClientHome from '@/page/client/home';
-import ClientTag from '@/page/client/tag';
 import ClientArticleList from '@/page/client/articleList';
+import withTitleAndRedirect from '@/Hoc/withTitleAndRedirect';
 
+export interface MyRoute extends Omit<RouteObject, 'children' | 'element'> {
+  element?: FC;
+  title?: string;
+  children?: MyRoute[];
+  redirect?: string;
+}
 /**
  * 路由配置
  * @see http://react-guide.github.io/react-router-cn/docs/guides/basics/RouteConfiguration.html
  */
-const routers: RouteObject[] = [
+const routers: MyRoute[] = [
   {
     path: '/manage',
-    element: <Layout />,
+    element: Layout,
     children: [
       {
         path: '/author',
-        element: <Author />
+        element: Author,
+        title: '作者管理'
       },
       {
         path: '/tag',
-        element: <Tag />
+        element: Tag,
+        title: '标签管理'
       },
       {
         path: '/article',
-        element: <Article />
+        element: Article,
+        title: '文章管理'
       },
       {
         path: '/system',
-        element: <System />
+        element: System,
+        title: '系统管理'
       },
       {
         path: '/markdown',
-        element: <Markdown />
+        element: Markdown,
+        title: '编辑文章'
+      },
+      {
+        path: '/',
+        redirect: '/article'
+      },
+      {
+        path: '*',
+        redirect: '/article'
       }
     ]
   },
   {
-    path: '/article',
-    element: <ClientArticle />
-  },
-  {
-    path: '/article/list',
-    element: <ClientArticleList />
-  },
-  {
     path: '/',
-    element: <ClientHome />
+    element: LayoutClient,
+    children: [
+      {
+        path: '/',
+        element: ClientHome
+      },
+      {
+        path: '/article',
+        element: ClientArticle
+      },
+      {
+        path: '/article/list',
+        element: ClientArticleList
+      },
+      {
+        path: '/tag',
+        element: ClientTag
+      }
+    ]
   },
   {
-    path: '/tag',
-    element: <ClientTag />
+    path: '*',
+    redirect: '/'
   }
 ];
 
-function format(routers: RouteObject[], basePath = ''): RouteObject[] {
+function format(routers: MyRoute[], basePath = ''): RouteObject[] {
   return routers.map(
-    ({ path, children, ...rest }) => {
+    ({ path, children, element, redirect, title = '木木记', ...rest }) => {
       const nextPath = basePath + path;
 
       return ({
         ...rest,
         path: nextPath,
-        children: children ? format(children, nextPath) : undefined
+        children: children && format(children, nextPath),
+        element: withTitleAndRedirect({ title, basePath, redirect, element })
       });
     }
   );
