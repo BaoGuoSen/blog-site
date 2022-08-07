@@ -29,7 +29,7 @@ const colums: TableColumnProps<User>[] = [
   {
     title: 'github',
     dataIndex: 'github',
-    render: (_, { github }) => github && < a href= "_blank">{github}</ a>
+    render: (_, { github }) => github && < a href= {github} target="_blank">{github}</ a>
   },
   {
     title: '邮箱',

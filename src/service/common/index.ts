@@ -26,7 +26,7 @@ async function countWeb() {
 }
 
 async function getCountWeb() {
-  const { data: { viewCount } } = await request<{ viewCount: number; }>('api/common/webViewCount');
+  const { data: { viewCount } } = await request<{ viewCount: number; }>('api/common/getWebViewCount');
 
   return viewCount;
 }

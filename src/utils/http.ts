@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { extend } from 'umi-request';
 
-import { message } from 'antd';
+import { notification } from 'antd';
 
 import { baseUrl } from '../config';
 import { ResBasic } from './types';
@@ -27,7 +27,7 @@ async function betterRequest<R>(url: string, params?: Record<string, any>, file?
       {
         method: 'POST',
         headers: {
-          code: sessionStorage.getItem('code') || ''
+          code: localStorage.getItem('code') || ''
         },
         data: file || params,
         requestType: file ? 'form' : 'json'
@@ -35,7 +35,7 @@ async function betterRequest<R>(url: string, params?: Record<string, any>, file?
     );
 
     if (code !== 200) {
-      message.error(msg || '系统繁忙');
+      notification.error({ message: msg || '系统繁忙' });
       throw new Error(msg || '网络错误');
     }
 

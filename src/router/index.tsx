@@ -2,9 +2,11 @@ import type { FC } from 'react';
 import type { RouteObject } from "react-router-dom";
 
 import Layout from '../layout';
+import Tools from '../page/tools';
 import Tag from '../page/manage/tag';
-import LayoutClient from '../layoutClient';
+import Tool from '../page/manage/tool';
 import ClientTag from '@/page/client/tag';
+import LayoutClient from '../layoutClient';
 import Author from '../page/manage/author';
 import System from '../page/manage/system';
 import ClientHome from '@/page/client/home';
@@ -43,6 +45,11 @@ const routers: MyRoute[] = [
         path: '/article',
         element: Article,
         title: '文章管理'
+      },
+      {
+        path: '/tool',
+        element: Tool,
+        title: '工具管理'
       },
       {
         path: '/system',
@@ -85,6 +92,10 @@ const routers: MyRoute[] = [
         element: ClientTag
       }
     ]
+  },
+  {
+    path: '/tools',
+    element: Tools
   },
   {
     path: '*',
