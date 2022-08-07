@@ -8,7 +8,7 @@ import Upload from '@/components/Upload';
 import { upload } from "@/service/common";
 import randomTagColor from "@/utils/randomTagColor";
 
-const colums: TableColumnProps<TagType & { viewCount: number }>[] = [
+const colums: TableColumnProps<TagType>[] = [
   {
     title: 'id',
     dataIndex: 'id'

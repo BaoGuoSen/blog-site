@@ -9,7 +9,7 @@ const Index: React.FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Button className={styles.button} icon={<BookOutlined />} onClick={() => nav('/manage')} />
+      <Button className={styles.button} icon={<BookOutlined />} onClick={() => nav('/manage/article')} />
       <Outlet />
     </div>
   );

@@ -11,7 +11,12 @@ interface Tag {
    * icon
    */
   icon?: string;
+  /**
+   * tag阅读量
+   */
+  viewCount?: number;
 }
+
 interface TagWithCountInfo {
   /**
    * 文章数目

@@ -41,7 +41,7 @@ const ManageLayout = () => {
   // 后台权限控制
   useEffect(() => {
     const isAuth = async () => {
-      const code = sessionStorage.getItem('code');
+      const code = localStorage.getItem('code');
 
       if (!code) {
         authModal();

@@ -25,7 +25,7 @@ const CodeModalContent: React.FC<IProps> = ({ register = () => void 0, setValida
 
     await confirmAuth({ code });
 
-    sessionStorage.setItem('code', code);
+    localStorage.setItem('code', code);
     setValidate(true);
   }, []);
 

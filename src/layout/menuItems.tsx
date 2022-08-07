@@ -4,7 +4,8 @@ import {
   TagsOutlined,
   FileOutlined,
   SettingOutlined,
-  UserOutlined
+  UserOutlined,
+  ToolOutlined
 } from '@ant-design/icons';
 
 type MenuItem = Required<MenuProps>['items'][number];
@@ -24,6 +25,11 @@ const menuItems: MenuItem[] = [
     key: 'article',
     label: '文章管理',
     icon: <FileOutlined />
+  },
+  {
+    key: 'tool',
+    label: '工具管理',
+    icon: <ToolOutlined />
   },
   {
     key: 'system',
