@@ -82,7 +82,7 @@ const ManageLayout = () => {
           >
             <div className={styles.logo}>
               <img
-                src="http://43.136.172.140/favicon.svg"
+                src="http://43.136.172.140/favicon.png"
                 className={styles.svg}
                 onClick={() => navigate('/')}
               />
