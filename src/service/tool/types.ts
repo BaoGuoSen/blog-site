@@ -2,7 +2,7 @@ interface Tool {
   /**
    * 主键
    */
-  id: string;
+  id: number;
   /**
    * css资源地址
    */

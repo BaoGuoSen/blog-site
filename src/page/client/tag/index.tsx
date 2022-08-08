@@ -52,7 +52,7 @@ const Index: FC = () => {
               forward: {
                 children: (
                   <Badge count={articleCount} overflowCount={999}>
-                    <span style={{ fontSize: Math.max(rate * 77, 20) }}>{name}</span>
+                    <span style={{ fontSize: Math.max(rate * 52, 20) }}>{name}</span>
                   </Badge>
                 )
               },

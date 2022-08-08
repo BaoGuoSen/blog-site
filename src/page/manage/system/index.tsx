@@ -5,7 +5,7 @@ const Index = () => {
   const { value: viewCount } = useAsync(getCountWeb);
   return (
     <div>
-      <h2>网站浏览量{viewCount}</h2>
+      <h2>网站浏览量: {viewCount}</h2>
     </div>
   );
 };

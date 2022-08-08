@@ -21,7 +21,7 @@ const colums: TableColumnProps<TagType>[] = [
   {
     title: '阅读量',
     dataIndex: 'viewCount',
-    render: (_, { viewCount }) => viewCount.toLocaleString()
+    render: (_, { viewCount = 0 }) => viewCount.toLocaleString()
   }
 ];
 

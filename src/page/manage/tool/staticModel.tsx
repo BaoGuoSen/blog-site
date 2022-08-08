@@ -7,12 +7,9 @@ import { upload } from "@/service/common";
 
 const colums: TableColumnProps<Tool>[] = [
   {
-    title: 'id',
-    dataIndex: 'id'
-  },
-  {
     title: '工具名',
-    dataIndex: 'title'
+    dataIndex: 'title',
+    render: (_, { id, title }) => <a target="_blank" href={`/tools/?id=${id}#/`}>{title}</a>
   }
 ];
 

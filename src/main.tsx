@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom/client";
+import { render } from "react-dom";
 import { useRoutes, BrowserRouter } from "react-router-dom";
 
 import "./main.less";
@@ -20,4 +20,4 @@ const App = () => {
   );
 };
 
-ReactDOM.createRoot(document.getElementById("blog-app")!).render(<App />);
+render(<App />, document.getElementById("blog-app")!);

@@ -144,6 +144,7 @@ const Index: React.FC = () => {
                 ({ viewCount, readingTime, title, id }) => (
                   <div className={styles.similar_item} key={id}>
                     <a
+                      target="_blank"
                       href={'?id=' + id}
                       className={styles.title}
                     >

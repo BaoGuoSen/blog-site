@@ -1,21 +1,31 @@
-import './index.less';
-import MarkDown from 'for-editor';
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+import 'react-markdown-editor-lite/lib/index.css';
+
+// Register plugins if required
+// MdEditor.use(YOUR_PLUGINS_HERE);
+
+// Initialize a markdown parser
+/* Markdown-it options */
+const mdParser = new MarkdownIt({ breaks: true });
 
 interface IProps {
   value?: string;
 }
+const Index: React.FC<IProps> = ({ value }) => {
 
-const Index: React.FC<IProps> = ({ value = '' }) => {
   return (
-    <MarkDown
-      preview
-      toolbar={{}}
+    <MdEditor
       value={value}
-      style={{
-        height: 'auto',
-        border: 'none',
-        boxShadow: 'rgb(0 0 0 / 10%) 0px 12px 12px'
-      }} />
+      config={{
+        view: {
+          menu: false,
+          md: false,
+          html: true
+        }
+      }}
+      renderHTML={(text) => mdParser.render(text)}
+    />
   );
 };
 

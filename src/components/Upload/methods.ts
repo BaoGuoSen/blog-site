@@ -12,5 +12,8 @@ export const getFileType = compose(toLower, last, split('.'));
 
 export const convertFileListToUrl = compose(join(','), map(prop('url')));
 
-const mapUrl = (url: string) => ({ name: '', url, uid: url });
+export const getFileNameByUrl = compose(last, split('/')) as (input: string) => string;
+
+const mapUrl = (url: string) => ({ name: getFileNameByUrl(url), url, uid: url });
+
 export const convertUrlToFileList = compose(map(mapUrl), split(','));

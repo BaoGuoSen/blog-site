@@ -21,7 +21,7 @@ const Index = () => {
     loading
   } = useAntdTable(getTools, { form });
 
-  const deleteAuthor = async (id: string) => {
+  const deleteAuthor = async (id: number) => {
     await deleteTool({ id });
     reset();
   };

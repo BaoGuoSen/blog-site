@@ -82,6 +82,7 @@ const ManageLayout = () => {
             >
               <div className={styles.logo}>
                 <img src="http://43.136.172.140/favicon.svg" className={styles.svg} onClick={() => navigate('/')}/>
+                <span className={styles.logoName}>木木记</span>
               </div>
               <Menu
                 selectedKeys={activeKey}
