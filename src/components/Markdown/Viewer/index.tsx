@@ -1,19 +1,18 @@
-import MarkdownIt from 'markdown-it';
-import MdEditor from 'react-markdown-editor-lite';
-import 'react-markdown-editor-lite/lib/index.css';
+import MarkdownIt from 'markdown-it'
+import MdEditor from 'react-markdown-editor-lite'
+import 'react-markdown-editor-lite/lib/index.css'
 
 // Register plugins if required
 // MdEditor.use(YOUR_PLUGINS_HERE);
 
 // Initialize a markdown parser
 /* Markdown-it options */
-const mdParser = new MarkdownIt({ breaks: true });
+const mdParser = new MarkdownIt({ breaks: true })
 
 interface IProps {
-  value?: string;
+  value?: string
 }
 const Index: React.FC<IProps> = ({ value }) => {
-
   return (
     <MdEditor
       value={value}
@@ -26,7 +25,7 @@ const Index: React.FC<IProps> = ({ value }) => {
       }}
       renderHTML={(text) => mdParser.render(text)}
     />
-  );
-};
+  )
+}
 
-export default Index;
+export default Index

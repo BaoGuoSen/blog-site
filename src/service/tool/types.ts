@@ -2,19 +2,19 @@ interface Tool {
   /**
    * 主键
    */
-  id: number;
+  id: number
   /**
    * css资源地址
    */
-  cssHref: string;
+  cssHref: string
   /**
    * script脚本地址
    */
-  scriptUrl: string;
+  scriptUrl: string
   /**
    * 工具名称(唯一)
    */
-  title: string;
+  title: string
 }
 
-export type { Tool };
+export type { Tool }

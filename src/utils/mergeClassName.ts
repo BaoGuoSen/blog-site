@@ -1,4 +1,4 @@
 function mergeClassName(...classes: string[]) {
-  return classes.join(' ');
+  return classes.join(' ')
 }
-export default mergeClassName;
+export default mergeClassName

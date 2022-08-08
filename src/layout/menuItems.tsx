@@ -1,4 +1,4 @@
-import type { MenuProps } from 'antd';
+import type { MenuProps } from 'antd'
 
 import {
   TagsOutlined,
@@ -6,9 +6,9 @@ import {
   SettingOutlined,
   UserOutlined,
   ToolOutlined
-} from '@ant-design/icons';
+} from '@ant-design/icons'
 
-type MenuItem = Required<MenuProps>['items'][number];
+type MenuItem = Required<MenuProps>['items'][number]
 
 const menuItems: MenuItem[] = [
   {
@@ -36,6 +36,6 @@ const menuItems: MenuItem[] = [
     label: '系统管理',
     icon: <SettingOutlined />
   }
-];
+]
 
-export default menuItems;
+export default menuItems

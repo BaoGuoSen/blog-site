@@ -1,14 +1,12 @@
-import 'markdown-navbar/dist/navbar.css';
-import MarkDownNav from 'markdown-navbar';
+import 'markdown-navbar/dist/navbar.css'
+import MarkDownNav from 'markdown-navbar'
 
 interface IProps {
-  value?: string;
+  value?: string
 }
 
 const Index: React.FC<IProps> = ({ value = '' }) => {
-  return (
-    <MarkDownNav source={'\n' + value} ordered={false} />
-  );
-};
+  return <MarkDownNav source={'\n' + value} ordered={false} />
+}
 
-export default Index;
+export default Index

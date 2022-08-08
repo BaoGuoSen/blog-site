@@ -2,30 +2,33 @@ interface Tag {
   /**
    * tagId
    */
-  id: number;
+  id: number
   /**
    * tag名稱
    */
-  name: string;
+  name: string
   /**
    * icon
    */
-  icon?: string;
+  icon?: string
   /**
    * tag阅读量
    */
-  viewCount?: number;
+  viewCount?: number
 }
 
 interface TagWithCountInfo {
   /**
    * 文章数目
    */
-  articleCount: number;
+  articleCount: number
   /**
    * tag浏览量
    */
-  viewCount: number;
+  viewCount: number
 }
 
-export type { Tag, TagWithCountInfo };
+interface TagRes {
+  list: (Tag & TagWithCountInfo)[]
+}
+export type { Tag, TagWithCountInfo, TagRes }

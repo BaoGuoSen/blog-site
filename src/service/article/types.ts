@@ -1,58 +1,58 @@
-import { Tag } from "../tag/types";
+import { Tag } from '../tag/types'
 
 interface Article {
   /**
    * 主键id
    */
-  id: number;
+  id: number
   /**
    * 文章标题
    */
-  title: string;
+  title: string
   /**
    * 文章摘要
    */
-  desc?: string;
+  desc?: string
   /**
    * 封面图
    */
-  backgroundUrl?: string;
+  backgroundUrl?: string
   /**
    * 发布日期
    */
-  createdAt: string;
+  createdAt: string
   /**
    * 作者id
    */
-  authorId?: number;
+  authorId?: number
   /**
    * 作者昵称
    */
-  authorName?: string;
+  authorName?: string
   /**
    * 作者头像
    */
-  avatar?: string;
+  avatar?: string
   /**
    * 文章所属标签
    */
-  tags?: Tag[];
+  tags?: Tag[]
   /**
    * 文章阅读量
    */
-  viewCount: number;
+  viewCount: number
   /**
    * markdown
    */
-  content: string;
+  content: string
   /**
    * 预计阅读时长
    */
-  readingTime: string;
+  readingTime: string
   /**
    * 字数
    */
-  length: number;
+  length: number
 }
 
-export type { Article };
+export type { Article }

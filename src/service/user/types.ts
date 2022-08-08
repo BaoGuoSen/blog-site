@@ -2,39 +2,39 @@ interface User {
   /**
    * 用户主键Id
    */
-  id: number;
+  id: number
   /**
    * 昵称
    */
-  name?: string;
+  name?: string
   /**
    * 头像
    */
-  avatar?: string;
+  avatar?: string
   /**
    * 卡片背景
    */
-  backgroundUrl?: string;
+  backgroundUrl?: string
   /**
    * 个人签名
    */
-  desc?: string;
+  desc?: string
   /**
    * 注册日期
    */
-  createAt?: string;
+  createAt?: string
   /**
    * 邮箱
    */
-  email?: string;
+  email?: string
   /**
    * git地址
    */
-  github?: string;
+  github?: string
   /**
    * total view
    */
-  totalViewCount: number;
+  totalViewCount: number
 }
 
-export type { User };
+export type { User }

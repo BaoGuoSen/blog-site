@@ -1,12 +1,12 @@
-import type { TableColumnProps } from "antd";
-import type { Tag as TagType } from "@/service/tag/types";
-import type { IComponentsConfig } from "@/utils/createForm/types";
+import type { TableColumnProps } from 'antd'
+import type { Tag as TagType } from '@/service/tag/types'
+import type { IComponentsConfig } from '@/utils/createForm/types'
 
-import { Tag } from "antd";
+import { Tag } from 'antd'
 
-import Upload from '@/components/Upload';
-import { upload } from "@/service/common";
-import randomTagColor from "@/utils/randomTagColor";
+import Upload from '@/components/Upload'
+import { upload } from '@/service/common'
+import randomTagColor from '@/utils/randomTagColor'
 
 const colums: TableColumnProps<TagType>[] = [
   {
@@ -23,18 +23,18 @@ const colums: TableColumnProps<TagType>[] = [
     dataIndex: 'viewCount',
     render: (_, { viewCount = 0 }) => viewCount.toLocaleString()
   }
-];
+]
 
-const searchBarFields = [
-  { label: '名称', name: 'name' }
-];
+const searchBarFields = [{ label: '名称', name: 'name' }]
 
 const drawerFormComponents: IComponentsConfig = [
   { label: '名称', name: 'name' },
   {
-    label: 'ICON', name: 'icon', require: false,
+    label: 'ICON',
+    name: 'icon',
+    require: false,
     element: <Upload request={(file) => upload({ file })} />
   }
-];
+]
 
-export { colums, searchBarFields, drawerFormComponents };
+export { colums, searchBarFields, drawerFormComponents }

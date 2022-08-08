@@ -1,9 +1,9 @@
-import type { IComponent, ICreateFormConfig } from './types';
+import type { IComponent, ICreateFormConfig } from './types'
 
-import { Form, Row, Col, Input } from 'antd';
-import { isValidElement, cloneElement, useEffect } from 'react';
+import { Form, Row, Col, Input } from 'antd'
+import { isValidElement, cloneElement, useEffect } from 'react'
 
-import FormItem from '@/components/FormItem';
+import FormItem from '@/components/FormItem'
 
 const useForm = ({
   formConfig: {
@@ -16,20 +16,21 @@ const useForm = ({
   } = {},
   components
 }: ICreateFormConfig) => {
-  const [localForm] = Form.useForm();
-  const form = outerForm || localForm;
-  const { getFieldValue } = form;
+  const [localForm] = Form.useForm()
+  const form = outerForm || localForm
+  const { getFieldValue } = form
 
-  const getKey = (key: number) => `key-${key}`;
+  const getKey = (key: number) => `key-${key}`
 
   // const getSafeVal = compose(defaultTo(-), getFieldValue);
 
   const convertConfig = (config: IComponent, index: number) => {
     // string
-    if (typeof config === 'string') return <span key={getKey(index)}>{config}</span>;
+    if (typeof config === 'string')
+      return <span key={getKey(index)}>{config}</span>
 
     // undefined null true false
-    if (typeof config !== 'object' || config == null) return null;
+    if (typeof config !== 'object' || config == null) return null
 
     // <h1/>
     if (isValidElement(config))
@@ -37,7 +38,7 @@ const useForm = ({
         <Col span={24} key={getKey(index)}>
           {config}
         </Col>
-      );
+      )
 
     // {name: xx, label: qq}
     const {
@@ -51,10 +52,10 @@ const useForm = ({
       placeholder = `请输入${label}`,
       element = <Input allowClear />,
       ...formItemProps
-    } = config;
+    } = config
 
-    const localSpan = span ?? itemSpan;
-    const localRequire = require ?? itemsRequire;
+    const localSpan = span ?? itemSpan
+    const localRequire = require ?? itemsRequire
 
     const children =
       showValue || displayOnly ? (
@@ -62,10 +63,15 @@ const useForm = ({
           <span>{render(getFieldValue(name || ''))}</span>
         </FormItem>
       ) : (
-        <FormItem require={localRequire} label={label} name={name} {...formItemProps}>
+        <FormItem
+          require={localRequire}
+          label={label}
+          name={name}
+          {...formItemProps}
+        >
           {element && cloneElement(element, { placeholder })}
         </FormItem>
-      );
+      )
 
     return (
       <Col
@@ -75,18 +81,18 @@ const useForm = ({
       >
         {children}
       </Col>
-    );
-  };
+    )
+  }
 
-  const createJSX = (arr: IComponent[]) => arr.map(convertConfig);
+  const createJSX = (arr: IComponent[]) => arr.map(convertConfig)
 
   const getComponents = () => {
-    if (typeof components === 'function') return components(form);
+    if (typeof components === 'function') return components(form)
 
-    return components;
-  };
+    return components
+  }
 
-  useEffect(() => form.setFieldsValue(data), [data, form]);
+  useEffect(() => form.setFieldsValue(data), [data, form])
 
   const formStructure = (
     <Form form={form} {...formConfig}>
@@ -94,8 +100,8 @@ const useForm = ({
         {() => <Row>{createJSX(getComponents())}</Row>}
       </Form.Item>
     </Form>
-  );
+  )
 
-  return { form, formStructure };
-};
-export default useForm;
+  return { form, formStructure }
+}
+export default useForm

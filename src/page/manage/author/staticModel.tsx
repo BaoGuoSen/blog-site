@@ -1,11 +1,11 @@
-import type { TableColumnProps } from "antd";
-import type { User } from "@/service/user/types";
+import type { TableColumnProps } from 'antd'
+import type { User } from '@/service/user/types'
 
-import { Avatar, DatePicker } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Avatar, DatePicker } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
 
-import Upload from '@/components/Upload';
-import { upload } from '@/service/common';
+import Upload from '@/components/Upload'
+import { upload } from '@/service/common'
 
 const colums: TableColumnProps<User>[] = [
   {
@@ -29,7 +29,12 @@ const colums: TableColumnProps<User>[] = [
   {
     title: 'github',
     dataIndex: 'github',
-    render: (_, { github }) => github && < a href= {github} target="_blank">{github}</ a>
+    render: (_, { github }) =>
+      github && (
+        <a href={github} target="_blank">
+          {github}
+        </a>
+      )
   },
   {
     title: '邮箱',
@@ -39,7 +44,7 @@ const colums: TableColumnProps<User>[] = [
     title: '注册时间',
     dataIndex: 'createdAt'
   }
-];
+]
 
 const searchBarFields = [
   { label: '昵称', name: 'name' },
@@ -50,15 +55,23 @@ const searchBarFields = [
     placeholder: ['开始日期', '结束日期'],
     element: <DatePicker.RangePicker style={{ width: '100%' }} />
   }
-];
+]
 
 const drawerFormComponents = [
   { label: '昵称', name: 'name', require: true },
-  { label: '头像', name: 'avatar', element: <Upload request={(file) => upload({ file })} /> },
-  { label: '卡片背景', name: 'backgroundUrl', element: <Upload request={(file) => upload({ file })} /> },
+  {
+    label: '头像',
+    name: 'avatar',
+    element: <Upload request={(file) => upload({ file })} />
+  },
+  {
+    label: '卡片背景',
+    name: 'backgroundUrl',
+    element: <Upload request={(file) => upload({ file })} />
+  },
   { label: '个人签名', name: 'desc' },
   { label: '邮箱', name: 'email' },
   { label: 'github', name: 'github' }
-];
+]
 
-export { colums, searchBarFields, drawerFormComponents };
+export { colums, searchBarFields, drawerFormComponents }
