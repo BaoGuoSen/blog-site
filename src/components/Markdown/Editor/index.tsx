@@ -1,15 +1,9 @@
-import MarkdownIt from 'markdown-it'
-import 'react-markdown-editor-lite/lib/index.css'
-
+import mdParser from '../parser'
 import { upload } from '@/service/common'
 import MdEditor from 'react-markdown-editor-lite'
 
 // Register plugins if required
-// MdEditor.use();
-
-// Initialize a markdown parser
-/* Markdown-it options */
-const mdParser = new MarkdownIt({ breaks: true })
+// MdEditor.use([])
 
 interface IProps {
   value?: string
