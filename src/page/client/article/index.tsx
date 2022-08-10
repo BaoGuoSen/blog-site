@@ -84,6 +84,12 @@ const Index: React.FC = () => {
                 </div>
 
                 <div
+                  className={mergeClassName(styles.subTitle, 'text-ellipsis')}
+                >
+                  {articleDesc && <div>{articleDesc}</div>}
+                </div>
+
+                <div
                   className={mergeClassName(
                     styles.info,
                     styles.light_color,
@@ -100,7 +106,6 @@ const Index: React.FC = () => {
                 {backgroundUrl && (
                   <img src={backgroundUrl} className={styles.cover} />
                 )}
-                {desc && <div>{articleDesc}</div>}
               </div>
 
               <Viewer value={content} />

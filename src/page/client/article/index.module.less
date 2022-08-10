@@ -23,13 +23,6 @@
   overflow: hidden;
   border-radius: @border_radius;
 
-  // 隐藏preview
-  :global {
-    .for-edit-preview {
-      display: none;
-    }
-  }
-
   .header {
     padding: 12px 10px;
     background: #fff;
@@ -46,6 +39,12 @@
     color: #252933;
   }
 
+  .subTitle {
+    direction: rtl;
+    font-size: 16px;
+    color: rgb(121, 118, 118);
+  }
+
   .info {
     margin: 10px 0;
   }
@@ -53,7 +52,7 @@
   .cover {
     margin: 12px 0 20px;
     width: 100%;
-    max-height: 365px;
+    max-height: 450px;
     object-fit: cover;
   }
 }
