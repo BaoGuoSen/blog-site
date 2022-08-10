@@ -22,7 +22,8 @@ const mdParser = new MarkdownIt({
   highlight(str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return hljs.highlight(str, { language: lang, ignoreIllegals: true }).value
+        return hljs.highlight(str, { language: lang, ignoreIllegals: true })
+          .value
       } catch (__) {
         // nothing to do
       }
