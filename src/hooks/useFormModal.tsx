@@ -1,52 +1,56 @@
-import type { ModalProps } from 'antd';
-import type { ReactElement } from 'react';
+import type { ModalProps } from 'antd'
+import type { ReactElement } from 'react'
 
-import { Modal, Button, Space } from 'antd';
-import { cloneElement, Fragment, useState, useRef } from 'react';
+import { Modal, Button, Space } from 'antd'
+import { cloneElement, Fragment, useState, useRef } from 'react'
 
-interface IOpenModal extends Omit<ModalProps, 'visible' | 'onCancel' | 'onOk' | 'confirmLoading'> {
-  content: ReactElement;
-  showCancel?: boolean;
-  refresh?: () => void;
+interface IOpenModal
+  extends Omit<ModalProps, 'visible' | 'onCancel' | 'onOk' | 'confirmLoading'> {
+  content: ReactElement
+  showCancel?: boolean
+  refresh?: () => void
 }
 
-type CallBack = () => Promise<unknown>;
+type CallBack = () => Promise<unknown>
 export interface IFormWithModal {
-  register?: (fn: CallBack) => unknown;
+  register?: (fn: CallBack) => unknown
 }
 
 const useFormModal = () => {
-  const [visible, setVisible] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
-  const [modalProps, setModalProps] = useState<IOpenModal>({ content: <Fragment /> });
-  const callbackRef = useRef<CallBack>(() => Promise.resolve(true));
+  const [visible, setVisible] = useState(false)
+  const [confirmLoading, setConfirmLoading] = useState(false)
+  const [modalProps, setModalProps] = useState<IOpenModal>({
+    content: <Fragment />
+  })
+  const callbackRef = useRef<CallBack>(() => Promise.resolve(true))
 
   const {
     content,
     showCancel = true,
     refresh = () => void 0,
-    ...rest } = modalProps;
+    ...rest
+  } = modalProps
 
-  const closeModal = () => setVisible(false);
+  const closeModal = () => setVisible(false)
 
   const openModal = (config: IOpenModal) => {
-    setModalProps(config);
-    setVisible(true);
-  };
+    setModalProps(config)
+    setVisible(true)
+  }
 
   const handleOk = async () => {
     try {
-      setConfirmLoading(true);
-      await callbackRef.current?.call(null);
-      closeModal();
-      refresh();
+      setConfirmLoading(true)
+      await callbackRef.current?.call(null)
+      closeModal()
+      refresh()
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.log('error:', (error as Error).message);
+      console.log('error:', (error as Error).message)
     } finally {
-      setConfirmLoading(false);
+      setConfirmLoading(false)
     }
-  };
+  }
 
   const Footer = (
     <div style={{ textAlign: 'right' }}>
@@ -56,8 +60,8 @@ const useFormModal = () => {
           确定
         </Button>
       </Space>
-    </div >
-  );
+    </div>
+  )
 
   const AntdModal = (
     <Modal
@@ -72,17 +76,17 @@ const useFormModal = () => {
     >
       {cloneElement(content, {
         register: (fn: CallBack) => {
-          callbackRef.current = fn;
+          callbackRef.current = fn
         }
       })}
     </Modal>
-  );
+  )
 
   return {
     Modal: AntdModal,
     closeModal,
     openModal
-  };
-};
+  }
+}
 
-export default useFormModal;
+export default useFormModal

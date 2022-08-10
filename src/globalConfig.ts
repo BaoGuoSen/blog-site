@@ -1,2 +1,2 @@
-export const minBoxSize = 100;
-export const maxBoxSize = 200;
+export const minBoxSize = 100
+export const maxBoxSize = 140

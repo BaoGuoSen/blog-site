@@ -1,4 +1,4 @@
-const Mock = require('mockjs');
+const Mock = require('mockjs')
 
 /**
  * mock使用文档
@@ -21,7 +21,7 @@ module.exports = {
           github: '@url'
         }
       ]
-    });
+    })
 
     setTimeout(() => {
       res.json({
@@ -30,38 +30,41 @@ module.exports = {
           total: list.length,
           list
         }
-      });
-    }, 230);
+      })
+    }, 230)
   },
 
   'post /api/user/card'(_, res) {
     const { data } = Mock.mock({
-      'data': {
+      data: {
         name: '@name',
-        avatar: 'https://ant-centerjr-public-dev-001.oss-cn-shanghai.aliyuncs.com/cigarette_saas/common/20220304/1646373036650%E4%B8%8B%E8%BD%BD.jpeg?Expires=1961992236&OSSAccessKeyId=LTAI5tQpZFuhYemmGjuce6pM&Signature=xcHkFC7KFJjuJulQPtaEos3A%2F8M%3D',
+        avatar:
+          'https://ant-centerjr-public-dev-001.oss-cn-shanghai.aliyuncs.com/cigarette_saas/common/20220304/1646373036650%E4%B8%8B%E8%BD%BD.jpeg?Expires=1961992236&OSSAccessKeyId=LTAI5tQpZFuhYemmGjuce6pM&Signature=xcHkFC7KFJjuJulQPtaEos3A%2F8M%3D',
         desc: '很多我们认为荒谬的事情, 正在变为现实',
         'totalViewCount|100-10000': 1,
         email: '744765302@qq.com',
         github: 'https://github.com/STTTOS'
       }
-    });
+    })
 
     setTimeout(() => {
       res.json({
         code: 200,
         data
-      });
-    }, 230);
+      })
+    }, 230)
   },
- 'post /api/article/similar'(_, res) {
+  'post /api/article/similar'(_, res) {
     const { list } = Mock.mock({
-      'list|5': [{
-        id: '@id',
-        title: '@cword(10,25)',
-        'viewCount|100-10000': 1,
-        'readingTime|2-15': 1
-      }]
-    });
+      'list|5': [
+        {
+          id: '@id',
+          title: '@cword(10,25)',
+          'viewCount|100-10000': 1,
+          'readingTime|2-15': 1
+        }
+      ]
+    })
 
     setTimeout(() => {
       res.json({
@@ -69,8 +72,8 @@ module.exports = {
         data: {
           list
         }
-      });
-    }, 230);
+      })
+    }, 230)
   },
 
   'post /api/user/all': (req, res) => {
@@ -78,10 +81,10 @@ module.exports = {
       'list|6-20': [
         {
           id: '@id',
-          name: '@name',
+          name: '@name'
         }
       ]
-    });
+    })
 
     setTimeout(() => {
       res.json({
@@ -89,8 +92,8 @@ module.exports = {
         data: {
           list
         }
-      });
-    }, 230);
+      })
+    }, 230)
   },
 
   'post /api/tag/list': (req, res) => {
@@ -102,7 +105,7 @@ module.exports = {
           viewCount: '@integer(100, 1000)'
         }
       ]
-    });
+    })
 
     setTimeout(() => {
       res.json({
@@ -111,8 +114,8 @@ module.exports = {
           total: list.length,
           list
         }
-      });
-    }, 230);
+      })
+    }, 230)
   },
 
   'post /api/tag/all': (req, res) => {
@@ -123,7 +126,7 @@ module.exports = {
           name: '@name'
         }
       ]
-    });
+    })
 
     setTimeout(() => {
       res.json({
@@ -131,8 +134,8 @@ module.exports = {
         data: {
           list
         }
-      });
-    }, 230);
+      })
+    }, 230)
   },
 
   'post /api/article/list': (req, res) => {
@@ -155,7 +158,7 @@ module.exports = {
           ]
         }
       ]
-    });
+    })
 
     setTimeout(() => {
       res.json({
@@ -164,18 +167,18 @@ module.exports = {
           total: list.length,
           list
         }
-      });
-    }, 230);
+      })
+    }, 230)
   },
 
   'post /api/article/detail': (req, res) => {
     const { detail } = Mock.mock({
-      'detail': {
+      detail: {
         id: '@id',
         title: '@title',
         desc: '@string'
       }
-    });
+    })
 
     detail.content = `# test`
 
@@ -183,10 +186,9 @@ module.exports = {
       res.json({
         code: 200,
         data: detail
-      });
-    }, 230);
+      })
+    }, 230)
   },
-
 
   'post /api/common/auth': (req, res) => {
     setTimeout(() => {
@@ -195,7 +197,7 @@ module.exports = {
         data: {
           isPass: true
         }
-      });
-    }, 230);
-  },
-};
+      })
+    }, 230)
+  }
+}

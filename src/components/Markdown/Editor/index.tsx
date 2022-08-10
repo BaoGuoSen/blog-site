@@ -1,30 +1,35 @@
-import { useRef } from 'react';
-import MarkDownEditor from 'for-editor';
-import { upload } from '@/service/common';
+import MarkdownIt from 'markdown-it'
+import 'react-markdown-editor-lite/lib/index.css'
+
+import { upload } from '@/service/common'
+import MdEditor from 'react-markdown-editor-lite'
+
+// Register plugins if required
+// MdEditor.use();
+
+// Initialize a markdown parser
+/* Markdown-it options */
+const mdParser = new MarkdownIt({ breaks: true })
 
 interface IProps {
-  value?: string;
-  onChange?: (val: string) => void;
+  value?: string
+  onChange?: (val: string) => void
 }
-
-const Index: React.FC<IProps> = ({ value, onChange = () => void 0 }) => {
-  const ref = useRef(null);
-
-  const handleImg = async (file: File) => {
-    const url = await upload({ file });
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore 组件类型缺陷
-    ref.current.$img2Url('图片', url);
-  };
+const Index: React.FC<IProps> = ({ onChange = () => void 0, value }) => {
+  const handleUpload = async (file: File, callback: (url: string) => void) => {
+    const url = await upload({ file })
+    callback(url)
+  }
 
   return (
-    <MarkDownEditor
-      ref={ref}
+    <MdEditor
       value={value}
-      addImg={handleImg}
-      onChange={onChange}
+      style={{ height: '100%' }}
+      onImageUpload={handleUpload}
+      onChange={({ text }) => onChange(text)}
+      renderHTML={(text) => mdParser.render(text)}
     />
-  );
-};
+  )
+}
 
-export default Index;
+export default Index

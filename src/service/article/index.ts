@@ -1,62 +1,80 @@
-import type { Article } from './types';
-import type { Params } from 'ahooks/lib/usePagination/types';
+import type { Article } from './types'
+import type { Params } from 'ahooks/lib/usePagination/types'
 
-import { message } from 'antd';
+import { message } from 'antd'
 
-import request from '../../utils/http';
+import request from '../../utils/http'
 
 // pc
-const getArticles = async (pageParams: Params[0], params: { id: string; }) => {
-  const { data } = await request<{ list: Article[], total: number }>('api/article/list', {
-    ...params,
-    ...pageParams
-  });
+const getArticles = async (pageParams: Params[0], params: { id: string }) => {
+  const { data } = await request<{ list: Article[]; total: number }>(
+    'api/article/list',
+    {
+      ...params,
+      ...pageParams
+    }
+  )
   // {list: [], total: 0}
-  return data;
-};
+  return data
+}
 
-const getClientArticles = async (params: { tagId?: number; authorId?: number; }) => {
-  const { data: { list } } = await request<{ list: Article[], total: number }>('api/article/clientList', params);
+const getClientArticles = async (params: {
+  tagId?: number
+  authorId?: number
+}) => {
+  const {
+    data: { list }
+  } = await request<{ list: Article[]; total: number }>(
+    'api/article/clientList',
+    params
+  )
 
-  return list;
-};
+  return list
+}
 
 async function addArticle(params: Omit<Article, 'id' | 'createdAt'>) {
-  const { msg } = await request<null>('api/article/add', params);
+  const { msg } = await request<null>('api/article/add', params)
 
-  message.success(msg);
+  message.success(msg)
 }
 
 async function deleteArticle(params: Pick<Article, 'id'>) {
-  const { msg } = await request<null>('api/article/delete', params);
+  const { msg } = await request<null>('api/article/delete', params)
 
-  message.success(msg);
+  message.success(msg)
 }
 
 async function updateArticle(params: Omit<Article, 'createdAt'>) {
-  const { msg } = await request<null>('api/article/update', params);
+  const { msg } = await request<null>('api/article/update', params)
 
-  message.success(msg);
+  message.success(msg)
 }
 
 async function getArticleDetail(params: Pick<Article, 'id'>) {
-  const { data } = await request<Article>('api/article/detail', params);
+  const { data } = await request<Article>('api/article/detail', params)
 
-  return data;
+  return data
 }
 
 async function getSimilarArticles(params: Pick<Article, 'id'>) {
-  const { data: { list } } = await request<{ list: Article[] }>('api/article/similar', params);
+  const {
+    data: { list }
+  } = await request<{ list: Article[] }>('api/article/similar', params)
 
-  return list;
+  return list
 }
 
 async function countArticle(params: Pick<Article, 'id'>) {
-  request<null>('api/article/count', params);
+  request<null>('api/article/count', params)
 }
 
 export {
-  getArticles, addArticle, deleteArticle,
-  updateArticle, getArticleDetail, getSimilarArticles,
-  countArticle, getClientArticles
-};
+  getArticles,
+  addArticle,
+  deleteArticle,
+  updateArticle,
+  getArticleDetail,
+  getSimilarArticles,
+  countArticle,
+  getClientArticles
+}

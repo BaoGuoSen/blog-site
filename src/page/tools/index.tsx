@@ -1,85 +1,79 @@
-import { Menu, Empty } from 'antd';
-import { useEffect, useState } from 'react';
+import { Menu, Spin } from 'antd'
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
-import useAsync from '../../hooks/useAsync';
-import { getAllTools } from '@/service/tool';
-import switchRender from '@/utils/switchRender';
+import styles from './index.module.less'
+import useAsync from '../../hooks/useAsync'
+import { getAllTools } from '@/service/tool'
 
 const Index: React.FC = () => {
-  const [current, setCurrent] = useState<string>('');
-  const { value: toolList = [] } = useAsync(getAllTools);
+  const [current, setCurrent] = useState<number>(0)
+  const { value: toolList = [], loading: fetchingTools } = useAsync(getAllTools)
+  const [loading, setLoading] = useState(false)
+
+  const [query, setQuery] = useSearchParams()
+  const tooId = query.get('id')
 
   useEffect(() => {
-    if (toolList.length === 0) return;
+    if (toolList.length === 0) return
 
-    setCurrent(toolList[0].title);
+    const key = Number(tooId) || toolList[0].id
+    setCurrent(key)
 
-    const [{ cssHref, scriptUrl }] = toolList;
-    loadStyle(cssHref?.split(','));
-    loadScript(scriptUrl?.split(','));
-  }, [toolList]);
+    const { cssHref, scriptUrl } = toolList.find(({ id }) => id === key)!
+    loadStyle(cssHref?.split(','))
+    loadScript(scriptUrl?.split(','))
+  }, [toolList])
 
   const loadScript = (urls: string[]) => {
-    urls.forEach(
-      (url) => {
-        const script = document.createElement('script');
-        script.src = url;
-        script.type = 'module';
+    urls.forEach((url) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.type = 'module'
+      script.crossOrigin = 'crossOrigin'
+      script.onload = () => setLoading(false)
 
-        document.querySelector('.child-app header')?.appendChild(script);
-      }
-    );
-  };
+      document.querySelector('.child-app header')?.appendChild(script)
+    })
+  }
 
   const loadStyle = (hrefs: string[]) => {
-    hrefs.forEach(
-      (href) => {
-        const css = document.createElement('link');
-        css.href = href;
-        css.rel = 'stylesheet';
+    hrefs.forEach((href) => {
+      const css = document.createElement('link')
+      css.href = href
+      css.rel = 'stylesheet'
 
-        document.querySelector('.child-app header')?.appendChild(css);
-      }
-    );
-  };
+      document.querySelector('.child-app header')?.appendChild(css)
+    })
+  }
 
   const onChange = ({ key }: { key: string }) => {
-    setCurrent(key);
-    const header = document.querySelector('.child-app header');
-    header && (header.innerHTML = '');
-
-    const { cssHref, scriptUrl } = toolList.find(({ title }) => title === key)!;
-
-    loadStyle(cssHref?.split(','));
-    loadScript(scriptUrl?.split(','));
-  };
+    setLoading(true)
+    setQuery({ id: key }, { replace: true })
+    window.location.reload()
+  }
 
   return (
     <div>
-      {
-        switchRender(
-          <>
-            <div>
-              <Menu
-                onClick={onChange}
-                selectedKeys={[current]}
-                mode="horizontal"
-                items={toolList?.map(({ title }) => ({ label: title, key: title }))}
-              />
-            </div>
-            <div className="child-app">
-              <header></header>
-              <div id="root" />
-            </div>
-          </>,
-          <div style={{ paddingTop: 60 }}>
-            <Empty description="暂无工具" />
-          </div>,
-          toolList.length !== 0
-        )
-      }
+      <Spin spinning={loading || fetchingTools}>
+        <div className={styles.wrapper}>
+          <Menu
+            onClick={onChange}
+            selectedKeys={[String(current)]}
+            mode="horizontal"
+            items={toolList?.map(({ title, id }) => ({
+              label: title,
+              key: id
+            }))}
+          />
+          <div className="child-app">
+            <header></header>
+            <div id="root" />
+          </div>
+        </div>
+      </Spin>
     </div>
-  );
-};
+  )
+}
 
-export default Index;
+export default Index

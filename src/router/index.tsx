@@ -1,26 +1,26 @@
-import type { FC } from 'react';
-import type { RouteObject } from "react-router-dom";
+import type { FC } from 'react'
+import type { RouteObject } from 'react-router-dom'
 
-import Layout from '../layout';
-import Tools from '../page/tools';
-import Tag from '../page/manage/tag';
-import Tool from '../page/manage/tool';
-import ClientTag from '@/page/client/tag';
-import LayoutClient from '../layoutClient';
-import Author from '../page/manage/author';
-import System from '../page/manage/system';
-import ClientHome from '@/page/client/home';
-import Article from '../page/manage/article';
-import Markdown from '../page/manage/markdown';
-import ClientArticle from '@/page/client/article/';
-import ClientArticleList from '@/page/client/articleList';
-import withTitleAndRedirect from '@/Hoc/withTitleAndRedirect';
+import Layout from '../layout'
+import Tools from '../page/tools'
+import Tag from '../page/manage/tag'
+import Tool from '../page/manage/tool'
+import ClientTag from '@/page/client/tag'
+import LayoutClient from '../layoutClient'
+import Author from '../page/manage/author'
+import System from '../page/manage/system'
+import ClientHome from '@/page/client/home'
+import Article from '../page/manage/article'
+import Markdown from '../page/manage/markdown'
+import ClientArticle from '@/page/client/article/'
+import ClientArticleList from '@/page/client/articleList'
+import withTitleAndRedirect from '@/Hoc/withTitleAndRedirect'
 
 export interface MyRoute extends Omit<RouteObject, 'children' | 'element'> {
-  element?: FC;
-  title?: string;
-  children?: MyRoute[];
-  redirect?: string;
+  element?: FC
+  title?: string
+  children?: MyRoute[]
+  redirect?: string
 }
 /**
  * 路由配置
@@ -101,21 +101,21 @@ const routers: MyRoute[] = [
     path: '*',
     redirect: '/'
   }
-];
+]
 
 function format(routers: MyRoute[], basePath = ''): RouteObject[] {
   return routers.map(
     ({ path, children, element, redirect, title = '木木记', ...rest }) => {
-      const nextPath = basePath + path;
+      const nextPath = basePath + path
 
-      return ({
+      return {
         ...rest,
         path: nextPath,
         children: children && format(children, nextPath),
         element: withTitleAndRedirect({ title, basePath, redirect, element })
-      });
+      }
     }
-  );
+  )
 }
 
-export default format(routers);
+export default format(routers)
