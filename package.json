@@ -15,7 +15,7 @@
     "stylelint:ci": "stylelint ./src/**/*.less --custom-syntax postcss-scss",
     "stylelint:fix": "stylelint --fix ./src/**/*.less --custom-syntax postcss-scss",
     "lint:fix": "npm run stylelint:fix && npm run eslint:fix",
-    "push:pre": "npm run eslint:fix && npm run prettier"
+    "precommit": "lint-staged"
   },
   "dependencies": {
     "ahooks": "^3.5.0",
@@ -75,7 +75,13 @@
     "typescript": "^4.6.3",
     "vite": "^2.9.9"
   },
-  "pre-commit": [
-    "push:pre"
-  ]
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": "npm run eslint:ci",
+    "**/*.{js,jsx,ts,tsx,less,md,json}": [
+      "prettier --write"
+    ]
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  }
 }
