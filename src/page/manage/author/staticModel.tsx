@@ -81,7 +81,7 @@ const drawerFormComponents: (type: 'add' | 'edit') => IComponent[] = (type) => {
       require: true,
       element: <Input />,
       range: [6, 12],
-      rules: ['word']
+      rules: ['int']
     },
     {
       label: '密码',

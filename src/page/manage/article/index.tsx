@@ -7,12 +7,14 @@ import { useNavigate } from 'react-router-dom'
 import { Form, Button, Space, Popconfirm } from 'antd'
 
 import styles from './index.module.less'
+import useUserInfo from '@/hooks/userUserInfo'
 import SafeTable from '@/components/SafeTable'
 import useGlobalData from '@/hooks/useGlobalData'
 import { colums, searchBarFields } from './staticModel'
 import { deleteArticle, getArticles } from '@/service/article'
 
 const Index = () => {
+  const user = useUserInfo()
   const [form] = Form.useForm()
   const navigate = useNavigate()
   const {
@@ -37,17 +39,21 @@ const Index = () => {
     ...colums,
     {
       title: '操作',
-      render: (_, { id }) => (
+      render: (_, { id, authorId }) => (
         <Space size="middle">
-          <a onClick={() => onAddOrUpdateClick(id)}>Update</a>
-          <Popconfirm
-            title="确定删除这篇文章吗?"
-            onConfirm={() => deleteArticleFn(id)}
-            okText="Yes"
-            cancelText="No"
-          >
-            <a>Delete</a>
-          </Popconfirm>
+          {user?.id === authorId && (
+            <>
+              <a onClick={() => onAddOrUpdateClick(id)}>Update</a>
+              <Popconfirm
+                title="确定删除这篇文章吗?"
+                onConfirm={() => deleteArticleFn(id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <a>Delete</a>
+              </Popconfirm>
+            </>
+          )}
         </Space>
       )
     }

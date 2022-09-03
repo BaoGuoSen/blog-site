@@ -8,16 +8,17 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import menuItems from './menuItems'
 import styles from './index.module.less'
 import { logoImg } from '@/globalConfig'
-import { getUser } from '@/service/user'
 import switchRender from '@/utils/switchRender'
+import useUserInfo from '@/hooks/userUserInfo'
 import PopoverHandle from '@/layout/popoverHandle'
 
 const { Content, Header, Footer, Sider } = Layout
 
 const ManageLayout = () => {
+  const user = useUserInfo()
   const navigate = useNavigate()
   const { pathname } = useLocation()
-  const [validate, setValidate] = useState(false)
+  const validate = user?.role === 'admin'
   const [collapsed, setCollapsed] = useState(false)
 
   const activeKey = pathname.split('/').slice(-1)
@@ -25,26 +26,6 @@ const ManageLayout = () => {
   const onMenuItemClick = ({ key }: MenuInfo) => {
     navigate(`/manage/${key}`)
   }
-
-  // 后台权限控制
-  useEffect(() => {
-    const isLogin = async () => {
-      try {
-        const { role } = await getUser()
-
-        if (role !== 'admin') {
-          const errorMsg = '暂无管理后台访问权限, 请联系管理员添加'
-          message.error(errorMsg)
-          throw new Error(errorMsg)
-        }
-        setValidate(true)
-      } catch (error) {
-        navigate('/login')
-      }
-    }
-
-    isLogin()
-  }, [])
 
   const validateRender = (validate: boolean, Node: ReactNode) => {
     return validate ? (
@@ -83,7 +64,9 @@ const ManageLayout = () => {
             />
           </Sider>
           <Layout className={styles.contentLayout}>
-            <Header className={styles.header}><PopoverHandle /></Header>
+            <Header className={styles.header}>
+              <PopoverHandle />
+            </Header>
             {validateRender(
               validate,
               <Content className={styles.content}>

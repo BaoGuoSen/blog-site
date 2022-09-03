@@ -40,6 +40,7 @@ const Index = () => {
     ...colums,
     {
       title: '操作',
+      width: 140,
       render: (_, record) => (
         <Space size="middle">
           <a onClick={() => onAddOrUpdateClick(record)}>Update</a>
