@@ -26,7 +26,11 @@ async function betterRequest<R>(
   file?: FormData
 ) {
   try {
-    const { data, code, msg = '系統繁忙' } = await request<Promise<ResBasic<R>>>(url, {
+    const {
+      data,
+      code,
+      msg = '系統繁忙'
+    } = await request<Promise<ResBasic<R>>>(url, {
       method: 'POST',
       headers: {
         code: localStorage.getItem('code') || ''
@@ -36,7 +40,7 @@ async function betterRequest<R>(
     })
 
     if (code !== 200) {
-      message.error( msg)
+      message.error(msg)
       throw new Error(msg)
     }
 
@@ -44,7 +48,6 @@ async function betterRequest<R>(
   } catch (error) {
     const errMsg = (error as Error).message
 
-    // TODO
     // 错误提示
     // 继续抛出错误, 为了终止之后的Promise处理进程
     throw new Error(errMsg)
