@@ -16,7 +16,7 @@ interface User {
    */
   role: 'admin' | 'user';
   /**
-   * 是否是股东
+   * 是否是贡献者
    */
   isContributor: boolean;
   /**
