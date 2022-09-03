@@ -2,9 +2,11 @@ import type { FC } from 'react'
 import type { RouteObject } from 'react-router-dom'
 
 import Layout from '../layout'
+import Login from '@/page/login'
 import Tools from '../page/tools'
 import Tag from '../page/manage/tag'
 import Tool from '../page/manage/tool'
+import Person from '@/page/client/person'
 import ClientTag from '@/page/client/tag'
 import LayoutClient from '../layoutClient'
 import Author from '../page/manage/author'
@@ -96,6 +98,14 @@ const routers: MyRoute[] = [
   {
     path: '/tools',
     element: Tools
+  },
+  {
+    path: '/login',
+    element: Login
+  },
+  {
+    path: '/person',
+    element: Person
   },
   {
     path: '*',

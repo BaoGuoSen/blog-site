@@ -13,22 +13,6 @@ const modelComponents = (
 ): IFormItemProps[] => {
   return [
     {
-      label: '作者',
-      name: 'authorId',
-      require: true,
-      element: (
-        <Select
-          allowClear
-          style={{ width: '100%' }}
-          placeholder="Please select authors"
-          options={userOptions}
-          filterOption={(input, option) => {
-            return new RegExp(input, 'i').test((option?.label as string) || '')
-          }}
-        />
-      )
-    },
-    {
       label: '添加标签',
       name: 'tagIds',
       require: true,

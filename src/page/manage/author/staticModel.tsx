@@ -1,7 +1,8 @@
 import type { TableColumnProps } from 'antd'
 import type { User } from '@/service/user/types'
+import type { IComponent } from '../../../utils/createForm/types'
 
-import { Avatar, DatePicker } from 'antd'
+import { Avatar, DatePicker, Select, Input, Switch } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 
 import Upload from '@/components/Upload'
@@ -25,6 +26,11 @@ const colums: TableColumnProps<User>[] = [
   {
     title: '文章阅读量',
     dataIndex: 'viewCount'
+  },
+  {
+    title: '股东',
+    dataIndex: 'isContributor',
+    render: (_, { isContributor }) => isContributor ? '是' : '继续努力'
   },
   {
     title: 'github',
@@ -57,21 +63,37 @@ const searchBarFields = [
   }
 ]
 
-const drawerFormComponents = [
-  { label: '昵称', name: 'name', require: true },
-  {
-    label: '头像',
-    name: 'avatar',
-    element: <Upload request={(file) => upload({ file })} />
-  },
-  {
-    label: '卡片背景',
-    name: 'backgroundUrl',
-    element: <Upload request={(file) => upload({ file })} />
-  },
-  { label: '个人签名', name: 'desc' },
-  { label: '邮箱', name: 'email' },
-  { label: 'github', name: 'github' }
-]
-
+const drawerFormComponents: (type: 'add' | 'edit') => IComponent[] = (type) => {
+  return [
+    { label: '账户', name: 'username', require: true, element: <Input disabled={type === 'edit'} /> },
+    {
+      label: '密码',
+      name: 'password',
+      require: type === 'add'
+    },
+    { label: '昵称', name: 'name', require: true },
+    { label: '股东', name: 'isContributor', element: <Switch /> },
+    {
+      label: '头像',
+      name: 'avatar',
+      element: <Upload request={(file) => upload({ file })} />
+    },
+    {
+      label: '卡片背景',
+      name: 'backgroundUrl',
+      element: <Upload request={(file) => upload({ file })} />
+    },
+    {
+      label: '角色',
+      name: 'role',
+      element: <Select options={[
+        { label: '管理员', value: 'admin' },
+        { label: '普通用户', value: 'user' }
+      ]} />
+    },
+    { label: '个人签名', name: 'desc' },
+    { label: '邮箱', name: 'email' },
+    { label: 'github', name: 'github' }
+  ]
+}
 export { colums, searchBarFields, drawerFormComponents }
