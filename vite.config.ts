@@ -8,10 +8,10 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost/'
+        target: 'http://43.136.172.140/'
       },
       '/static': {
-        target: 'http://localhost/'
+        target: 'http://43.136.172.140/'
       }
     }
   },
