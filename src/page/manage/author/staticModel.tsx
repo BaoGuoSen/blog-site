@@ -22,12 +22,12 @@ const colums: TableColumnProps<User>[] = [
   },
   {
     title: '账户',
-    dataIndex: 'username',
+    dataIndex: 'username'
   },
   {
     title: '角色',
     dataIndex: 'role',
-    render: (_, { role }) => role === 'admin' ? '管理员' : '普通用户'
+    render: (_, { role }) => (role === 'admin' ? '管理员' : '普通用户')
   },
   {
     title: '个性签名',
@@ -40,7 +40,7 @@ const colums: TableColumnProps<User>[] = [
   {
     title: '贡献者',
     dataIndex: 'isContributor',
-    render: (_, { isContributor }) => isContributor ? '是' : '否'
+    render: (_, { isContributor }) => (isContributor ? '是' : '否')
   },
   {
     title: 'github',
@@ -75,7 +75,14 @@ const searchBarFields = [
 
 const drawerFormComponents: (type: 'add' | 'edit') => IComponent[] = (type) => {
   return [
-    { label: '账户', name: 'username', require: true, element: <Input />, range: [6, 12], rules: ['word'] },
+    {
+      label: '账户',
+      name: 'username',
+      require: true,
+      element: <Input />,
+      range: [6, 12],
+      rules: ['word']
+    },
     {
       label: '密码',
       name: 'password',
@@ -84,7 +91,12 @@ const drawerFormComponents: (type: 'add' | 'edit') => IComponent[] = (type) => {
       element: <Password />
     },
     { label: '昵称', name: 'name', require: true },
-    { label: '贡献者', name: 'isContributor', element: <Switch />, valuePropName: 'checked' },
+    {
+      label: '贡献者',
+      name: 'isContributor',
+      element: <Switch />,
+      valuePropName: 'checked'
+    },
     {
       label: '头像',
       name: 'avatar',
@@ -98,10 +110,14 @@ const drawerFormComponents: (type: 'add' | 'edit') => IComponent[] = (type) => {
     {
       label: '角色',
       name: 'role',
-      element: <Select options={[
-        { label: '管理员', value: 'admin' },
-        { label: '普通用户', value: 'user' }
-      ]} />
+      element: (
+        <Select
+          options={[
+            { label: '管理员', value: 'admin' },
+            { label: '普通用户', value: 'user' }
+          ]}
+        />
+      )
     },
     { label: '个人签名', name: 'desc' },
     { label: '邮箱', name: 'email' },
