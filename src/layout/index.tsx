@@ -6,20 +6,19 @@ import { useState, useEffect } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 
 import menuItems from './menuItems'
+import PopoverHandle from '@/layout/popoverHandle'
 import styles from './index.module.less'
-import CodeModalContent from './modalContent'
-import { confirmAuth } from '@/service/common'
-import useFormModal from '@/hooks/useFormModal'
+import { logoImg } from '@/globalConfig'
+import { getUser } from '@/service/user'
 import switchRender from '@/utils/switchRender'
 
-const { Content, Footer, Sider } = Layout
+const { Content, Header, Footer, Sider } = Layout
 
 const ManageLayout = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const [validate, setValidate] = useState(false)
   const [collapsed, setCollapsed] = useState(false)
-  const { Modal: CodeModal, openModal } = useFormModal()
 
   const activeKey = pathname.split('/').slice(-1)
 
@@ -27,36 +26,19 @@ const ManageLayout = () => {
     navigate(`/manage/${key}`)
   }
 
-  const authModal = () => {
-    openModal({
-      title: '密钥验证',
-      closable: false,
-      keyboard: false,
-      centered: true,
-      showCancel: false,
-      content: <CodeModalContent setValidate={setValidate} />
-    })
-  }
-
   // 后台权限控制
   useEffect(() => {
-    const isAuth = async () => {
-      const code = localStorage.getItem('code')
-
-      if (!code) {
-        authModal()
-        return
-      }
-
+    const isLogin = async () => {
       try {
-        await confirmAuth({ code })
+        const { role } = await getUser()
+        if (role !== 'admin') throw new Error('暂无访问权限')
         setValidate(true)
-      } catch (error) {
-        authModal()
+      } catch {
+        navigate('/login')
       }
     }
 
-    isAuth()
+    isLogin()
   }, [])
 
   const validateRender = (validate: boolean, Node: ReactNode) => {
@@ -70,10 +52,10 @@ const ManageLayout = () => {
   }
 
   return (
-    <Layout className={styles.container} style={{ minHeight: '100vh' }}>
+    <>
       {switchRender(
         validateRender(validate, <Outlet />),
-        <>
+        <Layout className={styles.container}>
           <Sider
             collapsible
             theme="light"
@@ -82,8 +64,8 @@ const ManageLayout = () => {
           >
             <div className={styles.logo}>
               <img
-                src="http://43.136.172.140/favicon.png"
-                className={styles.svg}
+                src={logoImg}
+                className={styles.logoSvg}
                 onClick={() => navigate('/')}
               />
               <span className={styles.logoName}>木木记</span>
@@ -95,24 +77,20 @@ const ManageLayout = () => {
               items={menuItems}
             />
           </Sider>
-          <Layout className="site-layout">
+          <Layout className={styles.contentLayout}>
+            <Header className={styles.header}><PopoverHandle /></Header>
             {validateRender(
               validate,
-              <Content style={{ padding: '24px 24px 0' }}>
+              <Content className={styles.content}>
                 <Outlet />
               </Content>
             )}
-            <Footer style={{ textAlign: 'center' }}>
-              MuMuIo Designed by Sanfen, GuoSen. 2022
-            </Footer>
+            <Footer>MuMuIo Designed by Sanfen, GuoSen, JingLi. 2022</Footer>
           </Layout>
-          ,
-        </>,
+        </Layout>,
         activeKey[0] === 'markdown'
       )}
-
-      {CodeModal}
-    </Layout>
+    </>
   )
 }
 

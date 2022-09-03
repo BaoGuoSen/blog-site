@@ -35,7 +35,8 @@ const Index: FC = () => {
             desc,
             id,
             totalViewCount,
-            backgroundUrl
+            backgroundUrl,
+            isContributor
           }) => (
             <Box3D
               key={id}
@@ -78,7 +79,7 @@ const Index: FC = () => {
                   )
                 },
                 left: {
-                  children: <em className={styles.contributor}>Contributor</em>
+                  children: isContributor && <em className={styles.contributor}>Contributor</em>
                 },
                 back: {
                   children: backgroundUrl && (

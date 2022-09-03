@@ -4,6 +4,22 @@ interface User {
    */
   id: number
   /**
+  * 账户名
+  */
+  username: string;
+  /**
+  * 密码
+  */
+  password: string;
+  /**
+   * 用户角色
+   */
+  role: 'admin' | 'user';
+  /**
+   * 是否是股东
+   */
+  isContributor: boolean;
+  /**
    * 昵称
    */
   name?: string
@@ -37,4 +53,15 @@ interface User {
   totalViewCount: number
 }
 
-export type { User }
+interface Login {
+  /**
+   * 账户
+   */
+  username: string;
+  /**
+   * 密码
+   */
+  password: string;
+}
+
+export type { User, Login }

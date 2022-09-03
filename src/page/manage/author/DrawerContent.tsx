@@ -1,6 +1,7 @@
 import type { IFormWithDrawer } from '@/hooks/useFormDrawer'
 import type { ICreateFormConfig } from '@/utils/createForm/types'
 
+import { SHA256 } from 'crypto-js'
 import { useEffect, useCallback } from 'react'
 
 import createForm from '@/utils/createForm'
@@ -20,20 +21,27 @@ const AuthorDrawerContent: React.FC<IProps> = ({
       itemsRequire: false,
       data
     },
-    components: drawerFormComponents
+    components: drawerFormComponents(data ? 'edit' : 'add')
   }
   const { formStructure, form } = createForm(config)
 
   const handleFinish = useCallback(async () => {
-    const author: Omit<User, 'id' | 'createdAt'> = await form.validateFields()
+    const { password, ...rest }: Omit<User, 'id' | 'createdAt'> = await form.validateFields()
+    const params = {
+      password: SHA256(password).toString(),
+      ...rest
+    }
 
     if (data) {
-      await updateUser({ ...author, id: data.id })
+      await updateUser({
+        ...params,
+        id: data.id
+      })
 
       return
     }
 
-    await addUser(author)
+    await addUser(params)
   }, [])
 
   // 向父组件的提交按钮, 注册`handleFinish`
