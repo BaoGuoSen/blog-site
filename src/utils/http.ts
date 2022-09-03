@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { extend } from 'umi-request'
 
-import { notification } from 'antd'
+import { message } from 'antd'
 
 import { baseUrl } from '../config'
 import { ResBasic } from './types'
@@ -26,7 +26,7 @@ async function betterRequest<R>(
   file?: FormData
 ) {
   try {
-    const { data, code, msg } = await request<Promise<ResBasic<R>>>(url, {
+    const { data, code, msg = '系統繁忙' } = await request<Promise<ResBasic<R>>>(url, {
       method: 'POST',
       headers: {
         code: localStorage.getItem('code') || ''
@@ -36,8 +36,8 @@ async function betterRequest<R>(
     })
 
     if (code !== 200) {
-      notification.error({ message: msg || '系统繁忙' })
-      throw new Error(msg || '网络错误')
+      message.error( msg)
+      throw new Error(msg)
     }
 
     return { data, msg }

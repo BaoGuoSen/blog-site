@@ -1,16 +1,16 @@
 import type { ReactNode } from 'react'
 import type { MenuInfo } from 'rc-menu/lib/interface'
 
-import { Layout, Menu, Empty } from 'antd'
+import { Layout, Menu, Empty, message } from 'antd'
 import { useState, useEffect } from 'react'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 
 import menuItems from './menuItems'
-import PopoverHandle from '@/layout/popoverHandle'
 import styles from './index.module.less'
 import { logoImg } from '@/globalConfig'
 import { getUser } from '@/service/user'
 import switchRender from '@/utils/switchRender'
+import PopoverHandle from '@/layout/popoverHandle'
 
 const { Content, Header, Footer, Sider } = Layout
 
@@ -31,9 +31,14 @@ const ManageLayout = () => {
     const isLogin = async () => {
       try {
         const { role } = await getUser()
-        if (role !== 'admin') throw new Error('暂无访问权限')
+
+        if (role !== 'admin') {
+          const errorMsg = '暂无管理后台访问权限, 请联系管理员添加'
+          message.error(errorMsg)
+          throw new Error(errorMsg)
+        }
         setValidate(true)
-      } catch {
+      } catch (error) {
         navigate('/login')
       }
     }

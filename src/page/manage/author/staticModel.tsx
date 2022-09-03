@@ -65,15 +65,11 @@ const searchBarFields = [
 
 const drawerFormComponents: (type: 'add' | 'edit') => IComponent[] = (type) => {
   return [
-    {
-      label: '账户',
-      name: 'username',
-      require: true,
-      element: <Input disabled={type === 'edit'} />
-    },
+    { label: '账户', name: 'username', require: true, element: <Input />, range: [6, 12], rules: ['word'] },
     {
       label: '密码',
       name: 'password',
+      range: [6, 18],
       require: type === 'add'
     },
     { label: '昵称', name: 'name', require: true },
