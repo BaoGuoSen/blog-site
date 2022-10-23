@@ -79,7 +79,9 @@ const Index: FC = () => {
                   )
                 },
                 left: {
-                  children: isContributor && <em className={styles.contributor}>Contributor</em>
+                  children: isContributor && (
+                    <em className={styles.contributor}>Contributor</em>
+                  )
                 },
                 back: {
                   children: backgroundUrl && (

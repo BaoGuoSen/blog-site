@@ -78,7 +78,9 @@ const ManageLayout = () => {
             />
           </Sider>
           <Layout className={styles.contentLayout}>
-            <Header className={styles.header}><PopoverHandle /></Header>
+            <Header className={styles.header}>
+              <PopoverHandle />
+            </Header>
             {validateRender(
               validate,
               <Content className={styles.content}>

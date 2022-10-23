@@ -26,7 +26,13 @@ const Index: FC = () => {
         <span className={styles['logo-text']}>登录平台</span>
       </div>,
       ...loginForm,
-      <Button className={styles['logo-button']} htmlType="submit" type="primary" >登录 / 注册</Button>
+      <Button
+        className={styles['logo-button']}
+        htmlType="submit"
+        type="primary"
+      >
+        登录 / 注册
+      </Button>
     ]
   })
 

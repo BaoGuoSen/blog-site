@@ -30,7 +30,7 @@ const colums: TableColumnProps<User>[] = [
   {
     title: '股东',
     dataIndex: 'isContributor',
-    render: (_, { isContributor }) => isContributor ? '是' : '继续努力'
+    render: (_, { isContributor }) => (isContributor ? '是' : '继续努力')
   },
   {
     title: 'github',
@@ -65,7 +65,12 @@ const searchBarFields = [
 
 const drawerFormComponents: (type: 'add' | 'edit') => IComponent[] = (type) => {
   return [
-    { label: '账户', name: 'username', require: true, element: <Input disabled={type === 'edit'} /> },
+    {
+      label: '账户',
+      name: 'username',
+      require: true,
+      element: <Input disabled={type === 'edit'} />
+    },
     {
       label: '密码',
       name: 'password',
@@ -86,10 +91,14 @@ const drawerFormComponents: (type: 'add' | 'edit') => IComponent[] = (type) => {
     {
       label: '角色',
       name: 'role',
-      element: <Select options={[
-        { label: '管理员', value: 'admin' },
-        { label: '普通用户', value: 'user' }
-      ]} />
+      element: (
+        <Select
+          options={[
+            { label: '管理员', value: 'admin' },
+            { label: '普通用户', value: 'user' }
+          ]}
+        />
+      )
     },
     { label: '个人签名', name: 'desc' },
     { label: '邮箱', name: 'email' },

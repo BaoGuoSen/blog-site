@@ -10,7 +10,10 @@ import request from '../../utils/http'
 // 登录
 async function login(params: Login) {
   const { username, password } = params
-  const { data: { token }, msg } = await request<{ token: string }>('api/user/signin', {
+  const {
+    data: { token },
+    msg
+  } = await request<{ token: string }>('api/user/signin', {
     username,
     // 密码：密文传递
     password: SHA256(password).toString()

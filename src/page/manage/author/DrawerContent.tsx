@@ -26,7 +26,8 @@ const AuthorDrawerContent: React.FC<IProps> = ({
   const { formStructure, form } = createForm(config)
 
   const handleFinish = useCallback(async () => {
-    const { password, ...rest }: Omit<User, 'id' | 'createdAt'> = await form.validateFields()
+    const { password, ...rest }: Omit<User, 'id' | 'createdAt'> =
+      await form.validateFields()
     const params = {
       password: SHA256(password).toString(),
       ...rest

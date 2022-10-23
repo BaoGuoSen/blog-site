@@ -9,7 +9,7 @@ import styles from './index.module.less'
 import TagDrawerContent from './DrawerContent'
 import SafeTable from '@/components/SafeTable'
 import useFormDrawer from '@/hooks/useFormDrawer'
-import { colums, searchBarFields } from './staticModel'
+import { colums, searchBarFields, onlineEditName } from './staticModel'
 import { getTools, deleteTool } from '@/service/tool'
 
 const Index = () => {
@@ -40,19 +40,23 @@ const Index = () => {
     ...colums,
     {
       title: '操作',
-      render: (_, record) => (
-        <Space size="middle">
-          <a onClick={() => onAddOrUpdateClick(record)}>Update</a>
-          <Popconfirm
-            title="确定删除这个工具吗?"
-            onConfirm={() => deleteAuthor(record.id)}
-            okText="Yes"
-            cancelText="No"
-          >
-            <a>Delete</a>
-          </Popconfirm>
-        </Space>
-      )
+      render: (_, record) => {
+        if (record.title === onlineEditName) return ''
+
+        return (
+          <Space size="middle">
+            <a onClick={() => onAddOrUpdateClick(record)}>Update</a>
+            <Popconfirm
+              title="确定删除这个工具吗?"
+              onConfirm={() => deleteAuthor(record.id)}
+              okText="Yes"
+              cancelText="No"
+            >
+              <a>Delete</a>
+            </Popconfirm>
+          </Space>
+        )
+      }
     }
   ]
 
@@ -75,7 +79,12 @@ const Index = () => {
         </Button>
       </div>
 
-      <SafeTable columns={columns} rowKey="id" {...tableProps} />
+      <SafeTable
+        columns={columns}
+        rowKey="id"
+        {...tableProps}
+        dataSource={[...tableProps.dataSource, { title: onlineEditName }]}
+      />
       {Drawer}
     </div>
   )
