@@ -83,9 +83,7 @@ const Index: React.FC = () => {
                   {title}
                 </div>
 
-                <div
-                  className={mergeClassName(styles.subTitle, 'text-ellipsis')}
-                >
+                <div className={styles.subTitle}>
                   {articleDesc && <div>{articleDesc}</div>}
                 </div>
 

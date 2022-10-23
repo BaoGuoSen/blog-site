@@ -12,19 +12,21 @@ const PopoverHandle = () => {
 
   return (
     <div>
-      <Tooltip title='个人中心' color='blue'>
+      <Tooltip title="个人中心" color="blue">
         <UserOutlined style={{ fontSize: 20, fontWeight: 900 }} />
         {/* <img src="https://gw.alipayobjects.com/mdn/rms_e695cc/afts/img/A*8wxuSZfaDWsAAAAAAAAAAAAAARQnAQ" alt="" /> */}
       </Tooltip>
       <Popconfirm
         placement="bottom"
-        title='确认退出登录吗'
+        title="确认退出登录吗"
         onConfirm={logOut}
         cancelText="No"
         okText="Yes"
       >
-        <Tooltip title='退出登录' color='orange'>
-          <LogoutOutlined style={{ fontSize: 20, fontWeight: 900, marginLeft: 24 }} />
+        <Tooltip title="退出登录" color="orange">
+          <LogoutOutlined
+            style={{ fontSize: 20, fontWeight: 900, marginLeft: 24 }}
+          />
         </Tooltip>
       </Popconfirm>
     </div>

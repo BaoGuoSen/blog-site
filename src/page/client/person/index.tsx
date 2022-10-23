@@ -13,10 +13,7 @@ const Index: FC = () => {
   return (
     <div className={styles.container}>
       {/* 个人信息 */}
-      <div className={styles.personal}>
-        上：个人信息
-        下：邮箱 github等信息
-      </div>
+      <div className={styles.personal}>上：个人信息 下：邮箱 github等信息</div>
       {/* 文章列表 */}
       <div className={styles.article}>
         <div className={styles.out}></div>

@@ -4,21 +4,21 @@ interface User {
    */
   id: number
   /**
-  * 账户名
-  */
-  username: string;
+   * 账户名
+   */
+  username: string
   /**
-  * 密码
-  */
-  password: string;
+   * 密码
+   */
+  password: string
   /**
    * 用户角色
    */
-  role: 'admin' | 'user';
+  role: 'admin' | 'user'
   /**
    * 是否是股东
    */
-  isContributor: boolean;
+  isContributor: boolean
   /**
    * 昵称
    */
@@ -57,11 +57,11 @@ interface Login {
   /**
    * 账户
    */
-  username: string;
+  username: string
   /**
    * 密码
    */
-  password: string;
+  password: string
 }
 
 export type { User, Login }
