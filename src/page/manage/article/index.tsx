@@ -7,12 +7,14 @@ import { useNavigate } from 'react-router-dom'
 import { Form, Button, Space, Popconfirm } from 'antd'
 
 import styles from './index.module.less'
+import useUserInfo from '@/hooks/userUserInfo'
 import SafeTable from '@/components/SafeTable'
 import useGlobalData from '@/hooks/useGlobalData'
 import { colums, searchBarFields } from './staticModel'
 import { deleteArticle, getArticles } from '@/service/article'
 
 const Index = () => {
+  const user = useUserInfo()
   const [form] = Form.useForm()
   const navigate = useNavigate()
   const {
@@ -33,21 +35,27 @@ const Index = () => {
     navigate(url)
   }
 
+  const canEdit = ({ coAuthorIds, authorId }: Pick<Article, 'coAuthorIds' | 'authorId'>) => user && (authorId === user.id || coAuthorIds?.split(',').map(Number).includes(user.id))
+
   const columns: TableColumnProps<Article>[] = [
-    ...colums,
+    ...colums(userOptions),
     {
       title: '操作',
-      render: (_, { id }) => (
+      render: (_, { id, ...article }) => (
         <Space size="middle">
-          <a onClick={() => onAddOrUpdateClick(id)}>Update</a>
-          <Popconfirm
-            title="确定删除这篇文章吗?"
-            onConfirm={() => deleteArticleFn(id)}
-            okText="Yes"
-            cancelText="No"
-          >
-            <a>Delete</a>
-          </Popconfirm>
+          {canEdit(article) && (
+            <>
+              <a onClick={() => onAddOrUpdateClick(id)}>Update</a>
+              <Popconfirm
+                title="确定删除这篇文章吗?"
+                onConfirm={() => deleteArticleFn(id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <a>Delete</a>
+              </Popconfirm>
+            </>
+          )}
         </Space>
       )
     }

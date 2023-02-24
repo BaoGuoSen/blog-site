@@ -7,6 +7,7 @@ import { UserOutlined } from '@ant-design/icons'
 
 import Upload from '@/components/Upload'
 import { upload } from '@/service/common'
+import Password from 'antd/lib/input/Password'
 
 const colums: TableColumnProps<User>[] = [
   {
@@ -20,6 +21,15 @@ const colums: TableColumnProps<User>[] = [
     dataIndex: 'name'
   },
   {
+    title: '账户',
+    dataIndex: 'username'
+  },
+  {
+    title: '角色',
+    dataIndex: 'role',
+    render: (_, { role }) => (role === 'admin' ? '管理员' : '普通用户')
+  },
+  {
     title: '个性签名',
     dataIndex: 'desc'
   },
@@ -28,9 +38,9 @@ const colums: TableColumnProps<User>[] = [
     dataIndex: 'viewCount'
   },
   {
-    title: '股东',
+    title: '贡献者',
     dataIndex: 'isContributor',
-    render: (_, { isContributor }) => (isContributor ? '是' : '继续努力')
+    render: (_, { isContributor }) => (isContributor ? '是' : '否')
   },
   {
     title: 'github',
@@ -69,15 +79,24 @@ const drawerFormComponents: (type: 'add' | 'edit') => IComponent[] = (type) => {
       label: '账户',
       name: 'username',
       require: true,
-      element: <Input disabled={type === 'edit'} />
+      element: <Input />,
+      range: [6, 12],
+      rules: ['int']
     },
     {
       label: '密码',
       name: 'password',
-      require: type === 'add'
+      range: [6, 18],
+      require: type === 'add',
+      element: <Password />
     },
     { label: '昵称', name: 'name', require: true },
-    { label: '股东', name: 'isContributor', element: <Switch /> },
+    {
+      label: '贡献者',
+      name: 'isContributor',
+      element: <Switch />,
+      valuePropName: 'checked'
+    },
     {
       label: '头像',
       name: 'avatar',
