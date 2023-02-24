@@ -35,13 +35,15 @@ const Index = () => {
     navigate(url)
   }
 
+  const canEdit = ({ coAuthorIds, authorId }: Pick<Article, 'coAuthorIds' | 'authorId'>) => user && (authorId === user.id || coAuthorIds?.split(',').map(Number).includes(user.id))
+
   const columns: TableColumnProps<Article>[] = [
-    ...colums,
+    ...colums(userOptions),
     {
       title: '操作',
-      render: (_, { id, authorId }) => (
+      render: (_, { id, ...article }) => (
         <Space size="middle">
-          {user?.id === authorId && (
+          {canEdit(article) && (
             <>
               <a onClick={() => onAddOrUpdateClick(id)}>Update</a>
               <Popconfirm

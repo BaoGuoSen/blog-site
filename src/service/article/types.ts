@@ -53,6 +53,10 @@ interface Article {
    * 字数
    */
   length: number
+  /**
+   * 协同编辑者
+   */
+   coAuthorIds?: string
 }
 
 export type { Article }
