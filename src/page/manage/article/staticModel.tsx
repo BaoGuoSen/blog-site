@@ -8,7 +8,7 @@ import styles from './index.module.less'
 import { SelectProps } from 'rc-select/lib/Select'
 import randomTagColor from '@/utils/randomTagColor'
 
-const colums: TableColumnProps<Article>[] = [
+const colums: (userOptions: SelectProps['options']) => TableColumnProps<Article>[] = (userOptions) => [
   {
     title: '标题',
     dataIndex: 'title',
@@ -44,6 +44,14 @@ const colums: TableColumnProps<Article>[] = [
   {
     title: '作者昵称',
     dataIndex: 'authorName'
+  },
+  {
+    title: '协同编辑作者',
+    dataIndex: 'coAuthorIds',
+    render: (_, { coAuthorIds }) => coAuthorIds
+      ?.split(',')
+      .map((id) => userOptions?.find(({ value }) => value == Number(id))?.label)
+      .join(',')
   },
   {
     title: '发布时间',
